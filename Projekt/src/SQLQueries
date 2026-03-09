@@ -1,0 +1,32 @@
+//Izbrisi sve podatke iz svih tablica (struktura ostaje ista) i dodaj nove
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE Books;
+TRUNCATE TABLE Customers;
+TRUNCATE TABLE Librarians;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO Books (isbn, naziv_djela, autor, vrsta_djela, cijena, posudjena, dana_posudbe, customer_id) VALUES
+('978-0451524935', '1984', 'George Orwell', 'Roman', 30.00, 0, 0, NULL),
+('978-0743273565', 'The Great Gatsby', 'F. Scott Fitzgerald', 'Roman', 20.00, 0, 0, NULL),
+('978-0544003415', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Fantastika', 25.00, 0, 0, NULL),
+('978-0060935467', 'To Kill a Mockingbird', 'Harper Lee', 'Roman', 25.00, 0, 0, NULL),
+('978-0140449136', 'Crime and Punishment', 'Fyodor Dostoevsky', 'Roman', 50.00, 0, 0, NULL),
+('978-8674706358', 'Na Drini ćuprija', 'Ivo Andrić', 'Roman', 40.00, 0, 0, NULL),
+('978-9530603775', 'Gospoda Glembajevi', 'Miroslav Krleža', 'Drama', 15.00, 0, 0, NULL),
+('978-0062073501', 'Murder on the Orient Express', 'Agatha Christie', 'Kriminalistički', 60.00, 0, 0, NULL),
+('978-1503290563', 'Pride and Prejudice', 'Jane Austen', 'Roman', 23.00, 0, 0, NULL),
+('978-0156012195', 'Mali princ', 'Antoine de Saint-Exupéry', 'Dječji roman', 40.00, 0, 0, NULL);
+
+INSERT INTO Customers (ime, prezime, dob, grad, adresa_stanovanja) VALUES
+('Marko', 'Marković', 20, 'Zadar', 'Vukovarska 20 A'),
+('Ana', 'Anić', 25, 'Zadar', 'Put Nina 32 F'),
+('Ivan', 'Ivanić', 28, 'Zadar', 'Put Dikla 60'),
+('Petra', 'Petrić', 38, 'Zadar', 'Rapska ulica 39'),
+('Luka', 'Lukić', 16, 'Zadar', 'Ulica Karme 7 B');
+
+INSERT INTO Librarians (username, password, ime, prezime, dob, grad, adresa_stanovanja, is_admin) VALUES
+('admin', 'x68NGbME', 'admin', 'root', 0, 'xxxxxxxxxxx', 'xxxxxxxxxxx', 1),
+('JurekBurek', 'korisnik1', 'Juraj', 'Šimičević', 23, 'Zadar', 'Tomislava Ivčića 20 B, Zadar', 0);

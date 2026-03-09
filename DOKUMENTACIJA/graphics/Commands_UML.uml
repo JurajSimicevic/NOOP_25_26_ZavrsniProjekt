@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Commands.DeleteBookCommand</OriginalElement>
+  <nodes>
+    <node x="2727.407228915661" y="869.9999999999999">Commands.ReturnBookCommand</node>
+    <node x="927.027710843373" y="870.0">Commands.DeleteBookCommand</node>
+    <node x="979.0277108433728" y="315.62650602409644">Commands.BaseCommand</node>
+    <node x="305.67590361445775" y="869.9999999999999">Commands.BorrowBookCommand</node>
+    <node x="-135.0" y="870.0">Commands.AddBookCommand</node>
+    <node x="1121.5135542168675" y="17.93975903614455">Commands.CommandManager</node>
+    <node x="2288.7313253012035" y="869.9999999999999">Commands.RegisterLibrarianCommand</node>
+    <node x="1195.7036144578306" y="870.0">Commands.DeleteCustomerCommand</node>
+    <node x="1121.5135542168675" y="-197.06024096385545">Commands.CommandManagerInterface</node>
+    <node x="674.3518072289154" y="869.9999999999999">Commands.BuyBookCommand</node>
+    <node x="1820.0554216867456" y="869.9999999999999">Commands.RegisterCustomerCommand</node>
+    <node x="1514.3795180722882" y="869.9999999999999">Commands.DeleteLibrarianCommand</node>
+    <node x="1363.9671686746979" y="315.62650602409644">Commands.Command</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Commands.DeleteBookCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-14.999710843372895" y="92.0" />
+      <point x="1030.028" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.ReturnBookCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-2.2891566095495364E-4" y="-91.99999999999989" />
+      <point x="2904.407" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.RegisterLibrarianCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-3.2530120324736345E-4" y="-103.99999999999989" />
+      <point x="2491.731" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.RegisterCustomerCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="-4.2168674553977326E-4" y="104.00000000000011" />
+      <point x="2038.055" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.AddBookCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="92.0" />
+      <point x="69.0" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.BorrowBookCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-14.999903614457764" y="92.00000000000011" />
+      <point x="458.676" y="794.7168674698796" />
+      <point x="458.67599999999993" y="794.7168674698796" />
+      <point x="458.67599999999993" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.DeleteCustomerCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-14.999614457830603" y="92.0" />
+      <point x="1323.704" y="763.3433734939761" />
+      <point x="1323.7039999999997" y="763.3433734939761" />
+      <point x="1323.7039999999997" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.CommandManager" target="Commands.CommandManagerInterface" relationship="REALIZATION">
+      <point x="0.0" y="-80.5" />
+      <point x="0.0" y="55.5" />
+    </edge>
+    <edge source="Commands.BuyBookCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="1.9277108458481962E-4" y="92.00000000000011" />
+      <point x="784.352" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.BuyBookCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-14.999807228915415" y="92.00000000000011" />
+      <point x="769.352" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.RegisterCustomerCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-4.2168674553977326E-4" y="-103.99999999999989" />
+      <point x="2038.055" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.DeleteBookCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="2.891566271046031E-4" y="92.0" />
+      <point x="1045.028" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.AddBookCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-15.0" y="92.0" />
+      <point x="54.0" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.BorrowBookCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="9.638554223556639E-5" y="92.00000000000011" />
+      <point x="473.676" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.DeleteLibrarianCommand" target="Commands.Command" relationship="REALIZATION">
+      <point x="-14.999518072288083" y="92.00000000000011" />
+      <point x="1635.88" y="661.0" />
+      <point x="1456.467" y="661.0" />
+      <point x="-1.6867469776116195E-4" y="67.50049397590357" />
+    </edge>
+    <edge source="Commands.ReturnBookCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="-2.2891566095495364E-4" y="92.00000000000011" />
+      <point x="2904.407" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.RegisterLibrarianCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="-3.2530120324736345E-4" y="104.00000000000011" />
+      <point x="2491.731" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.DeleteLibrarianCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="4.819277119167964E-4" y="92.00000000000011" />
+      <point x="1650.88" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+    <edge source="Commands.DeleteCustomerCommand" target="Commands.BaseCommand" relationship="GENERALIZATION">
+      <point x="3.855421693970129E-4" y="92.0" />
+      <point x="1338.704" y="1103.0" />
+      <point x="909.528" y="1103.0" />
+      <point x="909.528" y="383.127" />
+      <point x="-99.64805421686674" y="4.939759035664792E-4" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.5099846390168971" showDependencies="true" x="1465.5" y="462.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

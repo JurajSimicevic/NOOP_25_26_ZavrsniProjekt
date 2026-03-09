@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>RegisterLibrarianComps.RegisterLibrarianWindow</OriginalElement>
+  <nodes>
+    <node x="-151.0" y="258.0">ObserversAndOtherComps.CustomerViewPanel</node>
+    <node x="2151.1101949025488" y="-86.4362818590705">MainFrameComps.MenuBar</node>
+    <node x="762.0" y="163.91154422788605">AddBookComps.AddBookWindow</node>
+    <node x="-67.0" y="190.0">ObserversAndOtherComps.Observer</node>
+    <node x="469.0" y="-14.0">GUI_Comps.ActiveBasePanel</node>
+    <node x="1407.1101949025488" y="185.5637181409295">LibrarianManagementComps.LibrarianManagementWindow</node>
+    <node x="1443.1101949025488" y="49.563718140929495">RegisterLibrarianComps.RegisterLibrarianWindow</node>
+    <node x="141.0" y="802.0">RegisterCustomerComps.RegisterCustomerBottomPanel</node>
+    <node x="299.0" y="-108.08845577211395">GUI_Comps.BasePanel</node>
+    <node x="196.0" y="598.0">RegisterCustomerComps.RegisterCustomerPanel</node>
+    <node x="96.0" y="122.0">ObserversAndOtherComps.ViewPanel</node>
+    <node x="319.0" y="938.0">MainFrameComps.ToolBar</node>
+    <node x="210.0" y="870.0">MainFrameComps.MainFrameFormPanel</node>
+    <node x="1228.0" y="-108.08845577211395">GUI_Comps.BaseFrame</node>
+    <node x="-122.0" y="394.0">ObserversAndOtherComps.KnjigeViewPanel</node>
+    <node x="-143.0" y="326.0">ObserversAndOtherComps.LibrarianViewPanel</node>
+    <node x="1507.1101949025488" y="117.5637181409295">BuyBookComps.BuyBookWindow</node>
+    <node x="56.0" y="530.0">AddBookComps.AddBookFormPanel</node>
+    <node x="1970.1101949025488" y="-86.4362818590705">GUI_Comps.BaseDialog</node>
+    <node x="985.0" y="-40.088455772113946">GUI_Comps.ShortcuttableFrame</node>
+    <node x="169.0" y="1006.0">LibrarianManagementComps.LibrarianManagementPanel</node>
+    <node x="226.0" y="734.0">AddBookComps.AddBookRightPanel</node>
+    <node x="809.0" y="95.91154422788605">MainFrameComps.MainFrame</node>
+    <node x="692.0" y="27.911544227886054">RegisterCustomerComps.RegisterCustomerWindow</node>
+    <node x="219.0" y="666.0">RegisterLibrarianComps.RegisterLibLeftPanel</node>
+    <node x="1034.0" y="231.91154422788605">LoginComps.LogInWindow</node>
+    <node x="-43.0" y="462.0">RegisterLibrarianComps.ConjoinedRegisterLibrarianPanel</node>
+    <node x="258.0" y="1074.0">RegisterCustomerComps.ConjoinedPanel</node>
+    <node x="1727.1101949025488" y="-18.436281859070505">GUI_Comps.ShortcuttableDialog</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="RegisterLibrarianComps.ConjoinedRegisterLibrarianPanel" target="GUI_Comps.BasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="364.0" y="476.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="AddBookComps.AddBookWindow" target="GUI_Comps.ShortcuttableFrame" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1086.5" y="177.91154422788605" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="GUI_Comps.ShortcuttableDialog" target="GUI_Comps.BaseDialog" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="2038.1101949025488" y="-4.436281859070505" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterCustomerComps.RegisterCustomerWindow" target="GUI_Comps.ShortcuttableFrame" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1086.5" y="41.911544227886054" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.CustomerViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="177.5" y="272.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterLibrarianComps.RegisterLibLeftPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="680.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="LibrarianManagementComps.LibrarianManagementPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="1020.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="AddBookComps.AddBookFormPanel" target="GUI_Comps.BasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="364.0" y="544.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterCustomerComps.ConjoinedPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="1088.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="MainFrameComps.ToolBar" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="952.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="AddBookComps.AddBookRightPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="748.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="MainFrameComps.MainFrame" target="GUI_Comps.ShortcuttableFrame" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1086.5" y="109.91154422788605" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.LibrarianViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="177.5" y="340.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterLibrarianComps.RegisterLibrarianWindow" target="GUI_Comps.ShortcuttableDialog" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1828.6101949025488" y="63.563718140929495" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="MainFrameComps.MainFrameFormPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="884.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="LibrarianManagementComps.LibrarianManagementWindow" target="GUI_Comps.ShortcuttableDialog" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1828.6101949025488" y="199.5637181409295" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="GUI_Comps.ShortcuttableFrame" target="GUI_Comps.BaseFrame" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1296.5" y="-26.088455772113946" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterCustomerComps.RegisterCustomerPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="612.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="RegisterCustomerComps.RegisterCustomerBottomPanel" target="GUI_Comps.ActiveBasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="816.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="LoginComps.LogInWindow" target="GUI_Comps.BaseFrame" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1296.5" y="245.91154422788605" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.ViewPanel" target="ObserversAndOtherComps.Observer" relationship="REALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="177.5" y="204.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.ViewPanel" target="GUI_Comps.BasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="364.0" y="136.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.KnjigeViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="177.5" y="408.0" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="BuyBookComps.BuyBookWindow" target="GUI_Comps.ShortcuttableDialog" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="1828.6101949025488" y="131.5637181409295" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+    <edge source="GUI_Comps.ActiveBasePanel" target="GUI_Comps.BasePanel" relationship="GENERALIZATION">
+      <point x="-0.0" y="0.0" />
+      <point x="558.0" y="-94.08845577211395" />
+      <point x="-0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Wide" zoom="0.450371370695476" showDependencies="false" x="1145.2833583208396" y="594.6019490254873" />
+  <SelectedNodes>
+    <node>GUI_Comps.BaseDialog</node>
+    <node>MainFrameComps.MenuBar</node>
+    <node>BuyBookComps.BuyBookWindow</node>
+    <node>RegisterLibrarianComps.RegisterLibrarianWindow</node>
+    <node>GUI_Comps.ShortcuttableDialog</node>
+    <node>LibrarianManagementComps.LibrarianManagementWindow</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

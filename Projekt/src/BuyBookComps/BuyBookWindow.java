@@ -136,7 +136,10 @@ public class BuyBookWindow extends ShortcuttableDialog {
     private void saleProcedure(){
         // Dohvat odabrane knjige iz panela
         Knjiga selected = knjigeViewPanel.getSelectedValue();
-        if (selected == null) return; // Osiguranje ako ništa nije odabrano
+        if (selected == null){
+            JOptionPane.showMessageDialog(this, "Knjiga nije odabrana!", "Greška", JOptionPane.ERROR_MESSAGE);
+            return; // Osiguranje ako ništa nije odabrano
+        }
 
         // Određivanje strategije (STRATEGY PATTERN)
         String method = Objects.requireNonNull(paymentOptions.getSelectedItem()).toString();

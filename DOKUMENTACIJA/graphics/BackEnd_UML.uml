@@ -1,139 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>BackEnd.Knjiga</OriginalElement>
+  <OriginalElement>BackEnd.User</OriginalElement>
   <nodes>
-    <node x="-81.14720456545842" y="943.4092667355274">BackEnd.DataAccessObject.BookDAO</node>
-    <node x="658.4817593804989" y="2462.4739822988677">BackEnd.ConnectionInfo</node>
-    <node x="1245.0465716322724" y="323.8521797696069">BackEnd.User</node>
-    <node x="2348.909960600986" y="2383.0029007392486">BackEnd.LibraryManagerInterface</node>
-    <node x="2334.1091095832844" y="174.4520676581924">BackEnd.SessionManager</node>
-    <node x="266.6191905059583" y="285.73909057753394">BackEnd.Knjiga</node>
-    <node x="-369.1166492146597" y="2511.4739822988677">BackEnd.DBConnectionManagerInterface</node>
-    <node x="1576.1418814509261" y="675.827732065047">BackEnd.Librarian</node>
-    <node x="-68.13139103646563" y="1742.353428150662">BackEnd.FactoryComps.CustomerFactory</node>
-    <node x="957.6170869639211" y="2286.099239636395">BackEnd.DataAccessObject.CustomerDAO</node>
-    <node x="2711.6957466264557" y="2721.54853727269">BackEnd.FilterInterface</node>
-    <node x="1862.1845275063856" y="1394.3158068182977">BackEnd.DataAccessObject.IntLibrarianDAO</node>
-    <node x="543.1156055092367" y="2299.2031620317985">BackEnd.FactoryComps.UserFactory</node>
-    <node x="1838.8664041572554" y="1076.8338599381805">BackEnd.DataAccessObject.LibrarianDAO</node>
-    <node x="796.7651295744805" y="323.4464642517107">BackEnd.Customer</node>
-    <node x="33.48175938049894" y="2462.4739822988677">BackEnd.DatabaseConnectionManager</node>
-    <node x="1605.1418814509254" y="1611.0233927647623">BackEnd.LibraryManager</node>
-    <node x="185.5671646488545" y="2058.931128333699">BackEnd.FactoryComps.LibrarianFactory</node>
-    <node x="1230.727660543429" y="2251.1444065930373">BackEnd.DataAccessObject.IntCustomerDAO</node>
-    <node x="382.48175938049894" y="2462.4739822988677">BackEnd.FilePathEnum</node>
-    <node x="-148.0" y="1357.0906588321254">BackEnd.DataAccessObject.IntBookDAO</node>
-    <node x="2633.410046720899" y="-14.0">BackEnd.SessionManagerInterface</node>
+    <node x="901.3126161121436" y="821.2940433658554">BackEnd.Knjiga</node>
+    <node x="431.5" y="542.1293193717277">BackEnd.Customer</node>
+    <node x="194.0" y="-145.39393943330765">BackEnd.FactoryComps.UserFactory</node>
+    <node x="450.7214217972537" y="1542.8293102776297">BackEnd.SessionManager.Holder</node>
+    <node x="-30.086910994764366" y="556.5">BackEnd.Librarian</node>
+    <node x="-393.7188052953636" y="328.52754082600393">BackEnd.FactoryComps.LibrarianFactory</node>
+    <node x="365.7214217972537" y="1223.7031322671587">BackEnd.SessionManager</node>
+    <node x="814.0643998544945" y="356.90471204188486">BackEnd.FactoryComps.CustomerFactory</node>
+    <node x="227.5" y="-13.5">BackEnd.User</node>
+    <node x="366.2214217972537" y="955.2130799111376">BackEnd.SessionManagerInterface</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="BackEnd.DataAccessObject.BookDAO" target="BackEnd.DataAccessObject.IntBookDAO" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.DatabaseConnectionManager" target="BackEnd.DBConnectionManagerInterface" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="BackEnd.SessionManager" target="BackEnd.Librarian" relationship="TO_ONE">
+      <point x="-137.0" y="0.0" />
+      <point x="166.91308900523563" y="1340.7031322671587" />
+      <point x="0.0" y="129.0" />
     </edge>
     <edge source="BackEnd.SessionManager" target="BackEnd.SessionManagerInterface" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="0.0" y="-117.0" />
+      <point x="0.0" y="68.0" />
     </edge>
     <edge source="BackEnd.Customer" target="BackEnd.User" relationship="GENERALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManagerInterface" target="BackEnd.FilterInterface" relationship="INTERFACE_GENERALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.LibraryManagerInterface" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="-161.0" y="-3.193717276417374E-4" />
+      <point x="398.0" y="635.129" />
+      <point x="398.0" y="487.405" />
+      <point x="439.0" y="487.405" />
+      <point x="66.0" y="176.5" />
     </edge>
     <edge source="BackEnd.FactoryComps.CustomerFactory" target="BackEnd.Customer" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="14.999600145505497" y="69.0" />
+      <point x="1008.064" y="635.1293193717277" />
+      <point x="161.0" y="0.0" />
     </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.DataAccessObject.IntBookDAO" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.DataAccessObject.IntLibrarianDAO" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="BackEnd.SessionManager.Holder" target="BackEnd.SessionManager" relationship="CREATE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="117.0" />
     </edge>
     <edge source="BackEnd.Customer" target="BackEnd.Knjiga" relationship="TO_MANY">
-      <point x="0.0" y="5.277219174056768" />
-      <point x="0.0" y="5.277219174056768" />
+      <point x="0.0" y="93.0" />
+      <point x="592.5" y="877.9287958115183" />
+      <point x="770.5170189546986" y="877.9287958115183" />
+      <point x="770.5170189546986" y="993.3780013771063" />
+      <point x="-163.0" y="-136.91604198874916" />
     </edge>
     <edge source="BackEnd.FactoryComps.LibrarianFactory" target="BackEnd.FactoryComps.UserFactory" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.FactoryComps.LibrarianFactory" target="BackEnd.Librarian" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.Customer" relationship="TO_MANY">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.FactoryComps.CustomerFactory" target="BackEnd.FactoryComps.UserFactory" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.SessionManager" target="BackEnd.Librarian" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.DataAccessObject.IntCustomerDAO" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.Librarian" relationship="TO_MANY">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.DataAccessObject.CustomerDAO" target="BackEnd.DataAccessObject.IntCustomerDAO" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.DataAccessObject.BookDAO" target="BackEnd.Knjiga" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.DataAccessObject.LibrarianDAO" target="BackEnd.DataAccessObject.IntLibrarianDAO" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.LibraryManager" target="BackEnd.Knjiga" relationship="TO_MANY">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="-11.204527898353604" y="-80.98037433385724" />
+      <point x="-225.9233331937172" y="-32.81465968586387" />
+      <point x="372.26230366492166" y="-32.81465968586387" />
+      <point x="-0.7376963350783399" y="27.26985566367415" />
     </edge>
     <edge source="BackEnd.Knjiga" target="BackEnd.Customer" relationship="TO_ONE">
-      <point x="0.0" y="-5.277219174056768" />
-      <point x="0.0" y="-5.277219174056768" />
-    </edge>
-    <edge source="BackEnd.DataAccessObject.CustomerDAO" target="BackEnd.FactoryComps.UserFactory" relationship="TO_ONE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="BackEnd.DataAccessObject.LibrarianDAO" target="BackEnd.Librarian" relationship="CREATE">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="0.0" y="-308.9999999999999" />
+      <point x="1064.3126161121436" y="768.8811518324605" />
+      <point x="817.9052741361256" y="768.8811518324605" />
+      <point x="817.9052741361256" y="650.1293193717277" />
+      <point x="161.0" y="15.0" />
     </edge>
     <edge source="BackEnd.Librarian" target="BackEnd.User" relationship="GENERALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="196.99991099476438" y="0.0" />
+      <point x="398.0" y="685.5" />
+      <point x="398.0" y="487.405" />
+      <point x="439.0" y="487.405" />
+      <point x="66.0" y="176.5" />
+    </edge>
+    <edge source="BackEnd.FactoryComps.LibrarianFactory" target="BackEnd.Librarian" relationship="CREATE">
+      <point x="-15.000194704636385" y="81.0" />
+      <point x="-229.719" y="685.5" />
+      <point x="-197.0" y="0.0" />
+    </edge>
+    <edge source="BackEnd.SessionManager.Holder" target="BackEnd.SessionManager" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.SessionManager.Holder" target="BackEnd.SessionManager" relationship="TO_ONE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.FactoryComps.CustomerFactory" target="BackEnd.FactoryComps.UserFactory" relationship="REALIZATION">
+      <point x="-8.487960063918422" y="-69.06492146596861" />
+      <point x="984.576439790576" y="-32.81465968586387" />
+      <point x="373.0" y="-32.81465968586387" />
+      <point x="373.0" y="-57.60432984293194" />
+      <point x="373.53591706806276" y="-57.60432984293194" />
+      <point x="0.5359170680627585" y="27.23719890974749" />
     </edge>
   </edges>
-  <settings layout="Circular" zoom="0.37084498291394846" showDependencies="true" x="1386.266361256544" y="2194.082722513089" />
+  <settings layout="Hierarchic Compact" zoom="0.5389390519187359" showDependencies="true" x="302.0770018848168" y="676.2774869109948" />
   <SelectedNodes />
   <Categories>
     <Category>Constructors</Category>
     <Category>Fields</Category>
+    <Category>Inner Classes</Category>
     <Category>Methods</Category>
     <Category>Properties</Category>
   </Categories>

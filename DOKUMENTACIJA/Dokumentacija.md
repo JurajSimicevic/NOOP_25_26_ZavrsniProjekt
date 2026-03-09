@@ -4,13 +4,6 @@
 
 ---
 
-## 🛠️ Tehnologije
-
----
-* **Jezik:** Java (SDK 20)
-* **GUI:** **Java Swing**
-* **Alati za izradu (Build tool):** Maven (za kontrolu zavisnosti).
-
 ## 🏗️ Arhitektura (MVC)
 
 Aplikacija je strukturirana prema **Model-View-Controller (MVC)** arhitektonskom obrascu kako bi se osiguralo jasno razdvajanje korisničkog sučelja od poslovne logike.
@@ -20,11 +13,142 @@ Aplikacija je strukturirana prema **Model-View-Controller (MVC)** arhitektonskom
 * **View:** Implementiran pomoću **Java Swing** biblioteke. Prikazuje podatke iz Modela korisniku i prosljeđuje korisničke akcije Controlleru.
 * **Controller:** Prima unos od korisnika (preko View-a), obrađuje ga i ažurira Model.
 
+---
+
+
+## 🧩 Detaljan opis UML dijagrama klasa
+
+
+S obzirom na to da se projekt sastoji od preko 100 klasa, UML dijagram i arhitektura sustava logički su podijeljeni u nekoliko ključnih modula prema 
+**MVC** (Model-View-Controller) arhitekturi i primijenjenim **SOLID** principima. 
+Sustav obilato koristi objektno-orijentirane obrasce dizajna (Design Patterns) kako bi se osigurala skalabilnost,
+slaba povezanost komponenti (*loose coupling*) i lako održavanje.
+
+U nastavku je detaljan opis strukture klasa po paketima i njihovim odgovornostima:
+
+### 1. Domenski entiteti i kreiranje objekata (Paket: `BackEnd` i `FactoryComps`)
+Ovaj dio predstavlja srž **Modela** i definira podatke koji se obrađuju u sustavu.
+* **Entiteti:** Osnovne klase su `Knjiga` i apstraktna klasa `User` koju nasljeđuju konkretne implementacije 
+`Customer` (član knjižnice) i `Librarian` (Knjižničar). Ove klase enkapsuliraju atribute i ponašanje stvarnih objekata.
+* **Factory obrazac (Tvornica):** Za instanciranje složenih korisničkih objekata koristi se Factory obrazac. 
+Kroz sučelja i klase `UserFactory`, `CustomerFactory` i `LibrarianFactory` centralizirana je logika kreiranja objekata,
+čime se skriva kompleksnost inicijalizacije od ostatka sustava.
+* **Upravljanje sjednicom:** `SessionManager` (i `SessionManagerInterface`) implementira logiku praćenja trenutno prijavljenog korisnika (knjižničara) u sustav.
+
+*(Ovdje slijedi UML dijagram domenskih entiteta)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Domenski Entiteti i Factory](graphics/BackEnd_UML.png)
+
+</details>
+
+### 2. Komunikacija s bazom podataka (Paket: `DataAccessObject`)
+Podatkovni sloj koristi **DAO (Data Access Object)** obrazac kako bi u potpunosti odvojio logiku pristupa bazi od poslovne logike aplikacije.
+* **Konekcija:** `DatabaseConnectionManager` implementira `DBConnectionManagerInterface`, te upravlja životnim ciklusom konekcije prema bazi
+dobivajući podatke spajanje na bazu iz (`ConnectionInfo`).
+* **DAO Sučelja i Klase:** Svaki domenski entitet ima pripadajuće sučelje (`IntBookDAO`, `IntCustomerDAO`, `IntLibrarianDAO`) i 
+konkretnu implementaciju (`BookDAO`, `CustomerDAO`, `LibrarianDAO`).
+* **Dijagram DAO sloja** prikazuje implementaciju Data Access Object i Singleton obrazaca dizajna.
+  Ovaj sloj je zadužen isključivo za SQL komunikaciju i mapiranje podataka. Korištenjem statičkih 
+'Holder' klasa (Singleton) osigurano je optimalno korištenje memorije i spriječeno višestruko spajanje na bazu. 
+Programiranjem prema sučeljima (npr. IntBookDAO) postignuta je slaba povezanost (loose coupling) komponenti sustava."
+
+*(Ovdje slijedi UML dijagram komunikacije s bazom)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Komunikacija s bazom podataka](graphics/Komunikacija_s_bazom_UML.png)
+
+</details>
+
+
+### 3. Poslovna logika (Paket: `Management`)
+Management klase djeluju kao posrednici između DAO sloja i Controllera (komandi). One drže poslovna pravila.
+* Klase `LibraryManager`, `BookManager`, `CustomerManager` i `LibrarianManager` upravljaju kolekcijama podataka u memoriji i delegiraju zahtjeve prema DAO sloju. Svaki menadžer implementira svoje sučelje (npr. `BookManagerInt`).
+* **Pretraživanje:** Pomoću sučelja `Filterable` i `FilterInterface` implementirana je napredna višekriterijska pretraga entiteta.
+
+*(Ovdje slijedi UML dijagram za poslovnu logiku)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Poslovna logika](graphics/Poslovna_logika_UML.png)
+
+</details>
+
+
+### 4. Controller sloj i upravljanje akcijama (Paket: `Commands`)
+Aplikacija ne koristi klasični, masivni Controller, već primjenjuje **Command obrazac (Naredba)**, čime se svaka korisnička akcija pretvara u zaseban objekt.
+* Osnova su sučelje `Command` i apstraktna klasa `BaseCommand`.
+* **Konkretne naredbe:** Svaka funkcionalnost ima svoju klasu: `AddBookCommand`, `BorrowBookCommand`, `ReturnBookCommand`, `BuyBookCommand`, `DeleteCustomerCommand`, `RegisterLibrarianCommand`, itd. Enum `ActionCommandsEnum` definira dostupne akcije.
+* Aplikacijom orkestrira `CommandManager` (preko `CommandManagerInterface`) koji prima zahtjeve iz grafičkog sučelja i izvršava ih, prosljeđujući ih Management sloju.
+
+*(Ovdje slijedi UML dijagram za Commands)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Commands](graphics/Commands_UML.png)
+
+</details>
+
+### 5. Fleksibilna validacija (Paket: `Decorators`)
+Za složenu validaciju korisničkih unosa i generiranje detaljnih poruka o pogreškama implementiran je **Decorator obrazac**.
+* Baza je sučelje `ReturnMessage` i osnovna klasa `BasicReturnMessage`, te apstraktni `MessageDecorator`.
+* **Specifični dekorateri:** Podijeljeni u pakete ovisno o kontekstu (`AddBookDecorators`, `BorrowBookDecorators`, `RegisterUserDecorators`...). Na primjer, prilikom dodavanja knjige mogu se dinamički ulančati `EmptyNazivDecorator` i `CijenaWrongFormatDecorator` kako bi se vratila složena, objedinjena poruka o pogrešci bez mijenjanja osnovnih klasa.
+
+*(Ovdje slijedi UML dijagram za Dekoratore)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Decorators](graphics/Decorators_UML.png)
+
+</details>
+
+### 6. Reaktivno korisničko sučelje (Paket: `ObserversAndOtherComps`)
+Kako bi grafičko sučelje (**View**) automatski reagiralo na promjene u bazi podataka, integriran je **Observer obrazac (Zapažač)**.
+* Logika je definirana kroz sučelja `Observable` i `Observer`.
+* Komponente sučelja, kao što su `ViewPanel`, `CustomerViewPanel`, `KnjigeViewPanel` i `LibrarianViewPanel`, djeluju kao pretplatnici. Kada `CommandManager` promijeni stanje sustava, `LibraryManager` emitira obavijest preko `Observable`, te osigurava da se sve tablice na ekranu automatski i trenutno osvježe s novim podacima.
+
+*(Ovdje slijedi UML dijagram za Observere)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Observers](graphics/ObserversAndOtherComps_UML.png)
+
+</details>
+
+### 7. Dinamička naplata (Paket: `StrategyComps`)
+Kupovina knjiga i naplata zakasnina izgrađena je na **Strategy obrascu (Strategija)**, čime je omogućeno lako dodavanje novih metoda plaćanja.
+* Sučelje `PaymentStrategy` propisuje metodu obrade plaćanja.
+* Implementacije `CardPayment`, `CashPayment` i `CryptoPayment` definiraju specifične algoritme za transakcije, na temelju odabira iz `PaymentStrategyEnum`.
+
+*(Ovdje slijedi UML dijagram Strategy)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Strategy](graphics/Strategy_UML.png)
+
+</details>
+
+### 8. Grafički sloj - View (Paketi: `GUI_Comps`, `MainFrameComps`, itd.)
+GUI sloj maksimalno primjenjuje principe nasljeđivanja i kompozicije komponenti biblioteke `Java Swing`.
+* **Zajednička baza:** Kako bi se izbjeglo ponavljanje koda, kreirane su roditeljske klase `BaseFrame`, `BaseDialog` i `BasePanel` (uz varijacije poput `ActiveBasePanel`, `ShortcuttableFrame`, `ShortcuttableDialog`).
+* **Modularnost:** Svaki prozor aplikacije izdvojen je u vlastiti paket (`AddBookComps`, `RegisterCustomerComps`, `LoginComps`...). Složeni prozori građeni su principom **kompozicije** (npr. `RegisterLibrarianWindow` sastoji se od `ConjoinedRegisterLibrarianPanel` i `RegisterLibLeftPanel`), uz pomoć dodatnih *utility* klasa za efekte vizualizacije (`EffectUtils`). Alatne trake i meniji modularno su izvedeni (`MenuBar`, `ToolBar`).
+
+*(Ovdje slijedi UML dijagram GUI)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz </summary>
+
+![UML Strategy](graphics/GUI_Inheritance_UML.png)
+
+</details>
+
+---
 ## 🗄️ Detaljan opis ER modela baze podataka (ERD)
 
 Baza podataka sastoji se od tri ključna entiteta koja prate poslovanje knjižnice. Struktura je dizajnirana kako bi podržala perzistenciju objekata uz osiguranje integriteta podataka.
 
----
+
 
 ### 1. Entiteti i atributi (Struktura tablica)
 
@@ -127,16 +251,16 @@ Kako bi kod bio održiv, fleksibilan i proširiv, implementirani su sljedeći ob
 
 ---
 
-| Obrazac (Pattern)           | Paket/Klasa                                            | Opis i uloga u projektu                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|:----------------------------|:-------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Strategy**                | `StrategyComps` + klasa `BuyBookWindow`                | Omogućuje dinamičku promjenu načina plaćanja pri kupovini knjige (CashPayment, CardPayment...).                                                                                                                                                                                                                                                                                                                                                        |
-| **Observer**                | `ObserversAndOtherComps` i Observable `LibraryManager` | Korišten za komunikaciju između Modela (`LibraryManager`) i View-a (`ViewPanel`). Kada se podaci u Modelu promijene, View se automatski osvježava bez čvrste vezanosti (loose coupling).                                                                                                                                                                                                                                                               |
-| **Fasada**                  | `LibraryManager`                                       | Iako je prethodno opisan kao `Observable`, ujedno je i "Fasada" za sve operacije. Zbrinjava se za kompleksne operacije što omogućava jednostavne pozive za akcijom (npr. brisanje knjige: Poziva `BookDAO.delete()`, briše knjigu iz memorije, te obaviještava `Observere`).                                                                                                                                                                           |
-| **Command**                 | `Commands`                                             | Enkapsulira korisničke zahtjeve (npr. klikove na gumbe) u objekte. Ovo olakšava implementaciju funkcionalnosti poput *Undo/Redo*.                                                                                                                                                                                                                                                                                                                      |
-| **Decorator**               | `Decorators`                                           | Omogućuje dinamičko stvaranje poruka Obavijesti, Upozorenja ili Greški.                                                                                                                                                                                                                                                                                                                                                                                |
-| **Factory i SimpleFactory** | `FactoryComps`                                         | "Factory" za stvaranje objekata `User` podklasa: `Customer` i `Librarian`, a "Simple Factory" za objekte klase `Knjiga`                                                                                                                                                                                                                                                                                                                                |
-| **Singleton**               | `Manager` i `DAO` klase                                | U projektu je korišten Bill Pugh Singleton obrazac za sve DAO i "Manager" klase. Singleton zato što nam ne treba nego jedna instanca ovih klasa (jer nam treba i samo jedan izvor podataka + štedi memoriju).                                                                                                                                                                                                                                          |
-| **Data Access Object**      | `DataAccessObject` paket                               | DAO obrazac korišten je za postizanje separation of concerns (razdvajanje odgovornosti). Poslovna logika komunicira s podacima isključivo preko DAO sučelja, čime je postignuta visoka modularnost i olakšano održavanje sustava.                                                                                                                                                                                                                      |
+| Obrazac (Pattern)           | Paket/Klasa                                            | Opis i uloga u projektu                                                                                                                                                                                                           |
+|:----------------------------|:-------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Strategy**                | `StrategyComps` + klasa `BuyBookWindow`                | Omogućuje dinamičku promjenu načina plaćanja pri kupovini knjige (CashPayment, CardPayment...).                                                                                                                                   |
+| **Observer**                | `ObserversAndOtherComps` i Observable `LibraryManager` | Korišten za komunikaciju između Modela (`LibraryManager`) i View-a (`ViewPanel`). Kada se podaci u Modelu promijene, View se automatski osvježava bez čvrste vezanosti (loose coupling).                                          |
+| **Fasada**                  | `LibraryManager` klasa                                 | Iako je prethodno opisan kao `Observable`, ujedno je i "Fasada" za sve operacije. Zbrinjava se za kompleksne operacije delegirajući radnje svojim pod-menadžerima što omogućava jednostavne pozive za akcijom, te osvježava View. |
+| **Command**                 | `Commands` paket                                       | Enkapsulira korisničke zahtjeve (npr. klikove na gumbe) u objekte. Ovo olakšava implementaciju funkcionalnosti poput *Undo/Redo*.                                                                                                 |
+| **Decorator**               | `Decorators` paket                                     | Omogućuje dinamičko stvaranje poruka Obavijesti, Upozorenja ili Greški.                                                                                                                                                           |
+| **Factory i SimpleFactory** | `FactoryComps` paket                                   | "Factory" za stvaranje objekata `User` podklasa: `Customer` i `Librarian`.                                                                                                                                                        |
+| **Singleton**               | `Manager` i `DAO` klase                                | U projektu je korišten Bill Pugh Singleton obrazac za sve DAO i "Manager" klase. Singleton zato što nam ne treba nego jedna instanca ovih klasa (jer nam treba i samo jedan izvor podataka + štedi memoriju).                     |
+| **Data Access Object**      | `DataAccessObject` paket                               | DAO obrazac korišten je za postizanje separation of concerns (razdvajanje odgovornosti). Poslovna logika komunicira s podacima isključivo preko DAO sučelja, čime je postignuta visoka modularnost i olakšano održavanje sustava. |
 ## 📂 Struktura projekta
 
 Ukratko, mapa projekta izgleda ovako:
@@ -145,21 +269,32 @@ Ukratko, mapa projekta izgleda ovako:
 
 ```text
 src/
- ├── AddBookComps/              # GUI za "AddBookWindow" prozor
- ├── BackEnd/                   # Logične klase za manipulaciju podatcima
- ├── BuyBookComps/              # GUI za "BuyBookWindow" prozor
- ├── Commands/                  # Command klase
- ├── Decorators/                # Dekoratori 
- ├── GUI_Comps                  # Bazične klase koje nasljeđuju sve ostale GUI klase
- ├── LibrarianManagementComps   # GUI za "LibrarianManagementComps" prozor
- ├── LoginComps                 # GUI za "LoginComps" prozor
- ├── MainFrameComps             # GUI za "MainFrame" prozor
- ├── ObserversAndOtherComps     # Sučelja i GUI vezani uz Observer + SearchField
- ├── RegisterCustomerComps      # GUI za "RegisterCustomerComps" prozor
- ├── RegisterLibrarianComps     # GUI za "RegisterLibrarianComps" prozor
- ├── ReturnBookComps            # GUI za "ReturnBookComps" prozor
- ├── StrategyComps              # Klase i sučelje za implementaciju Strategy dizajna
- └── UniverzalnoSucelje/        
+ ├── AddBookComps/                  # GUI komponente za "AddBookWindow" prozor
+ ├── BackEnd/                       # Domenski entiteti i klase za manipulaciju podacima
+ │    ├── DataAccessObject/         # DAO klase za direktnu komunikaciju s bazom (SQL)
+ │    ├── FactoryComps/             # Implementacija Factory obrasca za kreiranje objekata
+ │    └── Management/               # Poslovna logika i upravljanje listama entiteta
+ ├── BuyBookComps/                  # GUI komponente za "BuyBookWindow" prozor
+ ├── Commands/                      # Implementacija Command obrasca (akcije korisnika)
+ ├── Decorators/                    # Dekoratori za dinamičku validaciju i ispis grešaka
+ │    ├── AddBookDecorators/        # Validacije pri dodavanju knjiga
+ │    ├── BorrowBookDecorators/     # Validacije pri posuđivanju knjiga
+ │    ├── DeleteBookDecorators/     # Validacije pri brisanju knjiga
+ │    ├── DeleteUserDecorators/     # Validacije pri brisanju korisnika/knjižničara
+ │    ├── RegisterUserDecorators/   # Validacije pri registraciji (ime, prezime, lozinka...)
+ │    └── ReturnBookDecorators/     # Validacije i naplate pri povratu knjiga
+ ├── GUI_Comps/                     # Bazične klase (BaseFrame, BasePanel) koje nasljeđuju ostale GUI klase
+ ├── LibrarianManagementComps/      # GUI komponente za upravljanje knjižničarima
+ ├── LoginComps/                    # GUI komponente za prozor za prijavu
+ ├── MainFrameComps/                # GUI komponente za glavni prozor aplikacije (MainFrame)
+ ├── ObserversAndOtherComps/        # Observer implementacije (ViewPanel) i polja za pretragu
+ ├── RegisterCustomerComps/         # GUI komponente za registraciju novih članova
+ ├── RegisterLibrarianComps/        # GUI komponente za dodavanje novih zaposlenika
+ ├── ReturnBookComps/               # GUI komponente za proces vraćanja knjiga
+ ├── StrategyComps/                 # Klase i sučelja za implementaciju Strategy dizajna (naplate)
+ ├── UniverzalnoSucelje/            # Pomoćna univerzalna sučelja (ActionCommandListener)
+ ├── App.java                       # Glavna ("Main") klasa za pokretanje aplikacije
+ └── SQLQueries                     # Datoteka sa SQL skriptama za kreiranje baze
  ```
 
 ## ⚙️ Opis rada projekta
@@ -169,7 +304,7 @@ src/
 
 Kako bismo osigurali čistu arhitekturu i razdvojili korisničko sučelje od poslovne logike, korisničke akcije su enkapsulirane u Command objekte.
 
-Evo detaljnog pregleda (korak-po-korak) što se događa ispod haube kada korisnik klikne gumb **"Izbriši"** u AddBookWindow prozoru:
+Evo detaljnog pregleda (korak-po-korak) što se događa "ispod haube" kada korisnik klikne gumb **"Izbriši"** u AddBookWindow prozoru:
 
 <details>
   <summary>🔎 Klikni ovdje za prikaz primjera koda </summary>
@@ -182,17 +317,17 @@ protected void activateComps(){
         @Override
         public void eventOccurred(String actionCommand) {
             // Akcija za dodavanje nove knjige
-            if (actionCommand.equals(ActionCommandsEnum.ADD.toString())) {
+            if (actionCommand == ActionCommandsEnum.ADD) {
                 izvrsiUnos();
 
             }
             // Akcija za brisanje trenutno odabrane knjige iz liste
-            if (actionCommand.equals(ActionCommandsEnum.DELETE.toString())) {
+            if (actionCommand == ActionCommandsEnum.DELETE) {
                 Knjiga k = addBookRightPanel.getSelectedBook(); //<------------------------Dohvaćamo objekt knjige iz ViewPanel-a
                 CommandManager.getInstance().executeCommand(new DeleteBookCommand(k)); //<-Kreirana komanda i  poslana CommandManageru🟢!
             }
             // Zatvaranje ovog prozora i povratak na MainFrame
-            if (actionCommand.equals(ActionCommandsEnum.BACK.toString())) {
+            if (actionCommand == ActionCommandsEnum.BACK) {
                 new MainFrame();
                 dispose();
             }
@@ -208,7 +343,7 @@ protected void activateComps(){
 ```java
 @Override
 public boolean executeCommand(Command cmd) {
-    if(DatabaseConnectionManager.getInstance().isConnectionAlive())
+    if(DatabaseConnectionManager.getInstance().isConnectionAlive()){
         if (cmd.canExecute()) {
             if (cmd.execute()) {
                 undoStack.push(cmd);
@@ -216,8 +351,11 @@ public boolean executeCommand(Command cmd) {
                 redoStack.clear();
                 System.out.println("Komanda izvršena i dodana u Undo stog.");
                 return true;
+                }
             }
-        }
+        return false;
+    }
+    JOptionPane.showMessageDialog(null, "Niste povezani na bazu podataka!", "Greška", JOptionPane.ERROR_MESSAGE);
     return false;
 }
 ```
@@ -266,58 +404,66 @@ za dosta provjera, u ovoj metodi se grade poruke o greškama pomoću dekoratora
 ("lijepljenje" poruka svih grešaka u jednu poruku.)*
 
 4. **Poslovna logika (Model):** Ako su uvjeti zadovoljeni, komanda poziva `LibraryManager.removeBook(Knjiga k)` 
-koja prosljeđuje knjigu koju treba obrisati `BookDAO` klasi. Ako je `BookDAO.delete()` vratio `true`
-briše knjige iz radne memorije (Radna memorija jest `private List<Knjiga> knjige` u samoj `LibraryManager` klasi)
+koja prosljeđuje (delegira) poziv metode na `bookManager.removeBook(Knjiga k)`. *(Da je u pitanju bilo brisanje Customera 
+pozvao bi se CustomerManager ili LibrarianManager za Librarian objekt)*
 
 ```java
 @Override
 public boolean removeBook(Knjiga k) {
-    if (bDao.delete(k.getIsbn())) {    //<------ Ako je brisanje knjige iz baze uspješno:
-
-        knjige.remove(k);              //<------ Izbriši knjigu iz radne memorije.
-        
-        notifyObservers();             //<------ Obavještavamo sve panele (Observere) da se osvježe
-        return true;
-    }
-    return false;
+  // 1. Ako je operacija uspješna:
+  if (bookManager.removeBook(k)) {
+    // 2. Obavještavamo sve Observere da se osvježe.
+    notifyObservers();
+    return true;
+  }
+  return false;
 }
 ```
-*Razlog za tolikim korištenjem `boolean` povratnog tipa metode je radi CommandManagera:
-Ako je sve `true`sprema Command objekt u undo stog (Pogledajte kod gore)*
 
-5. **Baza podataka (DAO):** `LibraryManager` delegira konačni zadatak klasi `BookDAO`, 
-koja izvršava stvarni SQL upit i trajno uklanja knjigu iz MySQL baze podataka (vraća `true` ako je konekcija s bazom "živa"
-i ako je operacija uspješna.)
 
+5. **BookManager (BookManagerInt):** `BookManager` pokreće SVOJU `removeBook()` metodu pri kojoj gleda je li `BookDAO` uspješno izbrisao knjigu.
 ```java
-public void insert(Knjiga k) {
-    // PreparedStatement sprječava SQL Injection napade
-    String sql = "INSERT INTO Books (isbn, naziv_djela, autor, vrsta_djela, cijena, posudjena, dana_posudbe) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)";
-    Connection conn = DatabaseConnectionManager.getInstance().getConnection();
-    if(conn != null) {
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+@Override
+public boolean removeBook(Knjiga k) {
+  // 1. Provjeravamo je li brisanje knjige iz baze uspješno
+  if (bDao.delete(k.getIsbn())) {
 
-            // Postavljanje parametara na mjesta upitnika (?)
-            pstmt.setString(1, k.getIsbn());
-            pstmt.setString(2, k.getNazivDjela());
-            pstmt.setString(3, k.getAutor());
-            pstmt.setString(4, k.getVrstaDjela());
-            pstmt.setDouble(5, k.getCijena());
-            pstmt.setBoolean(6, false); // Inicijalno, nova knjiga je uvijek dostupna
-            pstmt.setInt(7, 0);         // Inicijalno, 0 dana posudbe
+    // 2. Ako je, brišemo je iz radne memorije.
+    knjige.remove(k);
 
-            // customer_id ostaje NULL u bazi po defaultu za novu knjigu
-
-            pstmt.executeUpdate();  // Izvršavanje INSERT naredbe
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    return true;
+  }
+  return false;
 }
 ```
 </details>
 
+5. **Baza podataka (DAO):** `BookManager` delegira konačni zadatak klasi `BookDAO`,
+   koja izvršava stvarni SQL upit i trajno uklanja knjigu iz MySQL baze podataka (vraća `true` ako je konekcija s bazom "živa"
+   i ako je operacija uspješna.). Ako je `BookDAO.delete()` vratio `true` tek onda `BookManager` briše knjigu iz radne memorije.
+
+```java
+@Override
+public boolean delete(String isbn) {
+  String sql = "DELETE FROM Books WHERE isbn = ?";
+  Connection conn = DatabaseConnectionManager.getInstance().getConnection();
+
+  if(conn != null) {
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+      pstmt.setString(1, isbn);
+      pstmt.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      JOptionPane.showMessageDialog(null, e.getMessage(), this.getClass().getSimpleName() + " - SQL Error", JOptionPane.ERROR_MESSAGE);
+      return false;
+    }
+  }
+  return false;
+}
+```
+*Razlog za tolikim korištenjem `boolean` povratnog tipa metode je radi CommandManagera:
+Ako je sve `true`sprema Command objekt u undo stog (Pogledajte kod gore)*
 ---
 
 ### 🛡️ Integritet podataka i slojevitost
@@ -354,8 +500,7 @@ Radiance je skup biblioteka koji zamjenjuje standardni Swing "Look and Feel" mod
 | **ephemeral-chroma**   | Dio Radiance ekosustava koji se bavi naprednim radom s bojama. Omogućava dinamičku promjenu paleta i usklađivanje boja komponenti unutar odabrane teme kako bi GUI bio koherentan. (Dodatak bez kojeg Radiance ne funkcionira...) | [GitHub Radiance](https://github.com/kirill-grouchnikov/radiance)              |
 | **MySQL-connector-j**  | Službeni JDBC (Java Database Connectivity) upravljački program koji omogućava aplikaciji komunikaciju s MySQL poslužiteljem. Neophodan je za izvršavanje SQL upita i rad s podacima u bazi.                                                                                                                                                                             | [MySQL Connector/J Developer Guide](https://dev.mysql.com/doc/connector-j/en/) |
 
-* **Verzija:** `v1.0.2`
-* **Izvor:** Biblioteke se povlače preko **JitPack** repozitorija ([https://jitpack.io](https://jitpack.io)).
+
 
 ---
 
@@ -409,70 +554,4 @@ Projekt je konfiguriran za rad na modernoj Java platformi, što je vidljivo iz p
   </dependency>
 </dependencies>
 ```
----
-
-
-## Arhitektura sustava i detaljan opis UML dijagrama klasa
-💻—🔗—⚙️—💾
-
-S obzirom na to da se projekt sastoji od preko 100 klasa, UML dijagram i arhitektura sustava logički su podijeljeni u nekoliko ključnih modula prema **MVC** (Model-View-Controller) arhitekturi i primijenjenim **SOLID** principima. Sustav obilato koristi objektno-orijentirane obrasce dizajna (Design Patterns) kako bi se osigurala skalabilnost, slaba povezanost komponenti (*loose coupling*) i lako održavanje.
-
-U nastavku je detaljan opis strukture klasa po paketima i njihovim odgovornostima:
-
-### 1. Domenski entiteti i kreiranje objekata (Paket: `BackEnd` i `FactoryComps`)
-Ovaj dio predstavlja srž **Modela** i definira podatke koji se obrađuju u sustavu.
-* **Entiteti:** Osnovne klase su `Knjiga` i apstraktna klasa `User` koju nasljeđuju konkretne implementacije `Customer` (Korisnik) i `Librarian` (Knjižničar). Ove klase enkapsuliraju atribute i ponašanje stvarnih objekata.
-* **Factory obrazac (Tvornica):** Za instanciranje složenih korisničkih objekata koristi se Factory obrazac. Kroz sučelja i klase `UserFactory`, `CustomerFactory` i `LibrarianFactory` centralizirana je logika kreiranja objekata, čime se skriva kompleksnost inicijalizacije od ostatka sustava.
-* **Upravljanje sjednicom:** `SessionManager` (i `SessionManagerInterface`) implementira logiku praćenja trenutno prijavljenog korisnika (knjižničara) u sustav.
-
-*(Ovdje slijedi UML dijagram domenskih entiteta)*
-<details>
-  <summary>🔎 Klikni ovdje za prikaz primjera koda </summary>
-
-![UML Domenski Entiteti i Factory](graphics/BackEnd_UML.png)
-
-</details>
-
-### 2. Komunikacija s bazom podataka (Paket: `DataAccessObject`)
-Podatkovni sloj koristi **DAO (Data Access Object)** obrazac kako bi u potpunosti odvojio logiku pristupa bazi od poslovne logike aplikacije.
-* **Konekcija:** `DatabaseConnectionManager` implementira `DBConnectionManagerInterface` i upravlja životnim ciklusom konekcije prema bazi (`ConnectionInfo`).
-* **DAO Sučelja i Klase:** Svaki domenski entitet ima pripadajuće sučelje (`IntBookDAO`, `IntCustomerDAO`, `IntLibrarianDAO`) i konkretnu implementaciju (`BookDAO`, `CustomerDAO`, `LibrarianDAO`). 
-* **Dijagram DAO sloja** prikazuje implementaciju Data Access Object i Singleton obrazaca dizajna.
-Ovaj sloj je zadužen isključivo za SQL komunikaciju i mapiranje podataka. Korištenjem statičkih 'Holder' klasa (Singleton) osigurano je optimalno korištenje memorije i spriječeno višestruko spajanje na bazu. Programiranjem prema sučeljima (npr. IntBookDAO) postignuta je slaba povezanost komponenti sustava."
-
-*(Ovdje slijedi UML dijagram komunikkacije s bazom)*
-![UML Komunikacija s bazom podataka](graphics/Komunikacija_s_bazom_UML.png)*
-
-
-### 3. Poslovna logika (Paket: `Management`)
-Management klase djeluju kao posrednici između DAO sloja i Controllera (komandi). One drže poslovna pravila.
-* Klase `LibraryManager`, `BookManager`, `CustomerManager` i `LibrarianManager` upravljaju kolekcijama podataka u memoriji i delegiraju zahtjeve prema DAO sloju. Svaki menadžer implementira svoje sučelje (npr. `BookManagerInt`).
-* **Pretraživanje:** Pomoću sučelja `Filterable` i `FilterInterface` implementirana je napredna višekriterijska pretraga entiteta.
-
-*(Ovdje slijedi UML dijagram komunikkacije s bazom)*
-![UML Poslovna logika](graphics/Poslovna_logika_UML.png)*
-### 4. Controller sloj i upravljanje akcijama (Paket: `Commands`)
-Aplikacija ne koristi klasični, masivni Controller, već primjenjuje **Command obrazac (Naredba)**, čime se svaka korisnička akcija pretvara u zaseban objekt.
-* Osnova su sučelje `Command` i apstraktna klasa `BaseCommand`.
-* **Konkretne naredbe:** Svaka funkcionalnost ima svoju klasu: `AddBookCommand`, `BorrowBookCommand`, `ReturnBookCommand`, `BuyBookCommand`, `DeleteCustomerCommand`, `RegisterLibrarianCommand`, itd. Enum `ActionCommandsEnum` definira dostupne akcije.
-* Aplikacijom orkestrira `CommandManager` (preko `CommandManagerInterface`) koji prima zahtjeve iz grafičkog sučelja i izvršava ih, prosljeđujući ih Management sloju.
-
-### 5. Fleksibilna validacija (Paket: `Decorators`)
-Za složenu validaciju korisničkih unosa i generiranje detaljnih poruka o pogreškama implementiran je **Decorator obrazac**.
-* Baza je sučelje `ReturnMessage` i osnovna klasa `BasicReturnMessage`, te apstraktni `MessageDecorator`.
-* **Specifični dekorateri:** Podijeljeni u pakete ovisno o kontekstu (`AddBookDecorators`, `BorrowBookDecorators`, `RegisterUserDecorators`...). Na primjer, prilikom dodavanja knjige mogu se dinamički ulančati `EmptyNazivDecorator` i `CijenaWrongFormatDecorator` kako bi se vratila složena, objedinjena poruka o pogrešci bez mijenjanja osnovnih klasa.
-
-### 6. Reaktivno korisničko sučelje (Paket: `ObserversAndOtherComps`)
-Kako bi grafičko sučelje (**View**) automatski reagiralo na promjene u bazi podataka, integriran je **Observer obrazac (Zapažač)**.
-* Logika je definirana kroz sučelja `Observable` i `Observer`.
-* Komponente sučelja, kao što su `ViewPanel`, `CustomerViewPanel`, `KnjigeViewPanel` i `LibrarianViewPanel`, djeluju kao pretplatnici. Kada `CommandManager` promijeni stanje sustava, on emitira obavijest, a `ViewPanelListener` osigurava da se sve tablice na ekranu automatski i trenutno osvježe s novim podacima.
-
-### 7. Dinamička naplata (Paket: `StrategyComps`)
-Kupovina knjiga i naplata zakasnina izgrađena je na **Strategy obrascu (Strategija)**, čime je omogućeno lako dodavanje novih metoda plaćanja.
-* Sučelje `PaymentStrategy` propisuje metodu obrade plaćanja.
-* Implementacije `CardPayment`, `CashPayment` i `CryptoPayment` definiraju specifične algoritme za transakcije, na temelju odabira iz `PaymentStrategyEnum`.
-
-### 8. Grafički sloj - View (Paketi: `GUI_Comps`, `MainFrameComps`, itd.)
-GUI sloj maksimalno primjenjuje principe nasljeđivanja i kompozicije komponenti biblioteke `Java Swing`.
-* **Zajednička baza:** Kako bi se izbjeglo ponavljanje koda, kreirane su roditeljske klase `BaseFrame`, `BaseDialog` i `BasePanel` (uz varijacije poput `ActiveBasePanel`, `ShortcuttableFrame`, `ShortcuttableDialog`).
-* **Modularnost:** Svaki prozor aplikacije izdvojen je u vlastiti paket (`AddBookComps`, `RegisterCustomerComps`, `LoginComps`...). Složeni prozori građeni su principom **kompozicije** (npr. `RegisterLibrarianWindow` sastoji se od `ConjoinedRegisterLibrarianPanel` i `RegisterLibLeftPanel`), uz pomoć dodatnih *utility* klasa za efekte vizualizacije (`EffectUtils`). Alatne trake i meniji modularno su izvedeni (`MenuBar`, `ToolBar`).
+*Kreator: Juraj Šimičević, 2026. Zadar, UNIZD - Studij Informacijskih Tehnologija.*

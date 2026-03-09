@@ -8,6 +8,7 @@ import Decorators.BasicReturnMessage;
 import Decorators.RegisterUserDecorators.*;
 import Decorators.ReturnMessage;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Naredba zadužena za registraciju novog zaposlenika (knjižničara) u sustav.
@@ -86,6 +87,7 @@ public class RegisterLibrarianCommand extends BaseCommand implements Command {
      */
     @Override
     public boolean execute() {
+        System.out.println(userName + password + ime + prezime + dob + grad + adresa);
         librarianFactory.setCredentials(userName, password);
         librarian = (Librarian) librarianFactory.createUser(ime, prezime, dob, grad, adresa);
         if (libraryManager.addLibrarian(librarian)) {
@@ -110,8 +112,15 @@ public class RegisterLibrarianCommand extends BaseCommand implements Command {
                 "UNDO", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (dialogResult == JOptionPane.YES_OPTION) {
-            if (libraryManager.deleteLibrarian(librarian)) {
-                JOptionPane.showMessageDialog(null, "Registracija poništena!", "Obavijest", JOptionPane.INFORMATION_MESSAGE);
+            Librarian loggedInUser = SessionManager.getInstance().getLoggedInUser();
+            if (loggedInUser != null) {
+                if (loggedInUser.getUsername().equals(librarian.getUsername())) {
+                    JOptionPane.showMessageDialog(null, "Ne možete izbrisati račun na koji ste trenutno prijavljeni!", "Greška", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+            if(libraryManager.deleteLibrarian(librarian)){
+                JOptionPane.showMessageDialog(null, "Poništeno registriranje knjižničara!", "Obavijest", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
         }

@@ -141,6 +141,7 @@ public class LibraryManager implements LibraryManagerInterface {
      */
     @Override
     public boolean removeBook(Knjiga k) {
+        // 1. Ako je operacija uspješna:
         if (bookManager.removeBook(k)) {
             // 2. Obavještavamo sve Observere da se osvježe.
             notifyObservers();

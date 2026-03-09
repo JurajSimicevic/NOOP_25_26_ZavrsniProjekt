@@ -29,4 +29,12 @@ public interface CommandManagerInterface {
      * @return {@code true} ako postoji radnja za ponavljanje.
      */
     boolean redo();
+
+    /**
+     * Koristi se radi sigurnosti. Poništava undo i redo stogove pri odjavljivanju korisnika:
+     * <p>
+     * Ne želimo da odjavljeni korisnik može izvršavati undo i redo prethodno izvedenih komandi.
+     * </p>
+     */
+    void clearSessions();
 }

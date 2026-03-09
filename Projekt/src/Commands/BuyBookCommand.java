@@ -55,6 +55,8 @@ public class BuyBookCommand extends BaseCommand implements Command {
             createMessage();
             return false;
         }
+        System.out.println(selectedBook);
+        System.out.println("Je li null?");
         return true;
     }
 

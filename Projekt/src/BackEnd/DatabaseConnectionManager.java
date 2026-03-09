@@ -121,10 +121,8 @@ public class DatabaseConnectionManager implements DBConnectionManagerInterface {
         try {
             // connection.isValid(2) šalje testni upit i čeka odgovor maksimalno 2 sekunde
             if(connection != null && !connection.isClosed() && connection.isValid(2) && isConnected){
-                System.out.println("spojeno");
                 return true;
             }
-            System.out.println("odspojeno");
             return false;
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());

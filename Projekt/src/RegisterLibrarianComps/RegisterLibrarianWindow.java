@@ -101,7 +101,6 @@ public class RegisterLibrarianWindow extends ShortcuttableDialog {
         String grad = registerLibLeftPanel.getGrad();
         String adresa = registerLibLeftPanel.getAdresa();
 
-        System.out.println("CommandManager.getInstance().executeCommand(new RegisterLibrarianCommand(userName, password, ime, prezime, dob, grad, adresa));");
         CommandManager.getInstance().executeCommand(new RegisterLibrarianCommand(userName, password, ime, prezime, dob, grad, adresa));
     }
 

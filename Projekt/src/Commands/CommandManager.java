@@ -1,6 +1,8 @@
 package Commands;
 
 import BackEnd.DatabaseConnectionManager;
+import BackEnd.Librarian;
+import BackEnd.SessionManager;
 
 import javax.swing.*;
 import java.util.Stack;
@@ -40,11 +42,8 @@ public class CommandManager implements CommandManagerInterface {
     @Override
     public boolean executeCommand(Command cmd) {
         if(DatabaseConnectionManager.getInstance().isConnectionAlive()){
-            System.out.println("DatabaseConnectionManager.getInstance().isConnectionAlive() prošo..");
             if (cmd.canExecute()) {
-                System.out.println("cmd.canExecute() prošo...");
                 if (cmd.execute()) {
-                    System.out.println("cmd.execute()");
                     undoStack.push(cmd);
                     // Ključno: Svaka nova akcija briše redo povijest jer se stvara nova grana događaja
                     redoStack.clear();
@@ -108,5 +107,12 @@ public class CommandManager implements CommandManagerInterface {
         }
         JOptionPane.showMessageDialog(null, "Ne možete ponoviti radnju: \n Niste povezani na bazu podataka!", "Greška", JOptionPane.ERROR_MESSAGE);
         return false;
+    }
+
+    /** {@inheritDoc}*/
+    @Override
+    public void clearSessions() {
+        undoStack.clear();
+        redoStack.clear();
     }
 }

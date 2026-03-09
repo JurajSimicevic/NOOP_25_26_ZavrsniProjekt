@@ -102,11 +102,15 @@ public class DeleteCustomerCommand extends BaseCommand implements Command {
                 "UNDO", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(dialogResult == JOptionPane.YES_OPTION){
+            System.out.println("dijalog == yes");
             if(libraryManager.addCustomer(customer)){
+                System.out.println("libraryManager.addCustomer uspio");
                 JOptionPane.showMessageDialog(null, "Poništeno brisanje člana!", "Obavijest", JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
+            System.out.println("libraryManager.addCustomer nije uspio");
         }
+        System.out.println("dijalog == no");
         return false;
     }
 

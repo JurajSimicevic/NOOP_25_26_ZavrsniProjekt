@@ -15,6 +15,6 @@ public class InvalidAgeDecorator extends MessageDecorator {
     /** {@inheritDoc} + poruka koju sam nadodaje.*/
     @Override
     public String getMessage() {
-        return decoratedMessage.getMessage() + "\n Korisnik je premlad ili je unso godina krivo napisan!";
+        return decoratedMessage.getMessage() + "\n Korisnik je premlad ili je unos godina krivo napisan!";
     }
 }

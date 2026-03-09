@@ -49,6 +49,7 @@ public class CustomerManager implements CustomerManagerInt{
         if (cDao.insert(c)) {
             // 2. Dodaj ga i u radnu memoriju
             customers.add(c);
+            return true;
         }
         return false;
     }

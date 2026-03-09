@@ -1,6 +1,7 @@
 package BackEnd;
 
 import BackEnd.Management.LibraryManager;
+import Commands.CommandManager;
 
 import javax.swing.*;
 
@@ -90,7 +91,10 @@ public class SessionManager implements  SessionManagerInterface{
 
     /**{@inheritDoc}*/
     @Override
-    public void logout() { this.loggedInUser = null; }
+    public void logout() {
+        this.loggedInUser = null;
+        CommandManager.getInstance().clearSessions();
+    }
 
     private boolean search4User(String username, String password) {
         for (Librarian l : LibraryManager.getInstance().getLibrarians()) {

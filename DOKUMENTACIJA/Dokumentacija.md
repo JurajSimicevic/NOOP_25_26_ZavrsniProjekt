@@ -411,73 +411,68 @@ Projekt je konfiguriran za rad na modernoj Java platformi, što je vidljivo iz p
 ```
 ---
 
-## Dijagrami klasa
-## 💻—🔗—⚙️—💾 
+
+## Arhitektura sustava i detaljan opis UML dijagrama klasa
+💻—🔗—⚙️—💾
+
+S obzirom na to da se projekt sastoji od preko 100 klasa, UML dijagram i arhitektura sustava logički su podijeljeni u nekoliko ključnih modula prema **MVC** (Model-View-Controller) arhitekturi i primijenjenim **SOLID** principima. Sustav obilato koristi objektno-orijentirane obrasce dizajna (Design Patterns) kako bi se osigurala skalabilnost, slaba povezanost komponenti (*loose coupling*) i lako održavanje.
+
+U nastavku je detaljan opis strukture klasa po paketima i njihovim odgovornostima:
+
+### 1. Domenski entiteti i kreiranje objekata (Paket: `BackEnd` i `FactoryComps`)
+Ovaj dio predstavlja srž **Modela** i definira podatke koji se obrađuju u sustavu.
+* **Entiteti:** Osnovne klase su `Knjiga` i apstraktna klasa `User` koju nasljeđuju konkretne implementacije `Customer` (Korisnik) i `Librarian` (Knjižničar). Ove klase enkapsuliraju atribute i ponašanje stvarnih objekata.
+* **Factory obrazac (Tvornica):** Za instanciranje složenih korisničkih objekata koristi se Factory obrazac. Kroz sučelja i klase `UserFactory`, `CustomerFactory` i `LibrarianFactory` centralizirana je logika kreiranja objekata, čime se skriva kompleksnost inicijalizacije od ostatka sustava.
+* **Upravljanje sjednicom:** `SessionManager` (i `SessionManagerInterface`) implementira logiku praćenja trenutno prijavljenog korisnika (knjižničara) u sustav.
+
+*(Ovdje slijedi UML dijagram domenskih entiteta)*
+<details>
+  <summary>🔎 Klikni ovdje za prikaz primjera koda </summary>
+
+![UML Domenski Entiteti i Factory](graphics/BackEnd_UML.png)
+
+</details>
+
+### 2. Komunikacija s bazom podataka (Paket: `DataAccessObject`)
+Podatkovni sloj koristi **DAO (Data Access Object)** obrazac kako bi u potpunosti odvojio logiku pristupa bazi od poslovne logike aplikacije.
+* **Konekcija:** `DatabaseConnectionManager` implementira `DBConnectionManagerInterface` i upravlja životnim ciklusom konekcije prema bazi (`ConnectionInfo`).
+* **DAO Sučelja i Klase:** Svaki domenski entitet ima pripadajuće sučelje (`IntBookDAO`, `IntCustomerDAO`, `IntLibrarianDAO`) i konkretnu implementaciju (`BookDAO`, `CustomerDAO`, `LibrarianDAO`). 
+* **Dijagram DAO sloja** prikazuje implementaciju Data Access Object i Singleton obrazaca dizajna.
+Ovaj sloj je zadužen isključivo za SQL komunikaciju i mapiranje podataka. Korištenjem statičkih 'Holder' klasa (Singleton) osigurano je optimalno korištenje memorije i spriječeno višestruko spajanje na bazu. Programiranjem prema sučeljima (npr. IntBookDAO) postignuta je slaba povezanost komponenti sustava."
+
+*(Ovdje slijedi UML dijagram komunikkacije s bazom)*
+![UML Komunikacija s bazom podataka](graphics/Komunikacija_s_bazom_UML.png)*
 
 
-U ovom poglavlju detaljno je prikazana arhitektura sustava kroz specijalizirane dijagrame klasa. Sustav je dekomponiran na logičke cjeline kako bi se jasno vidjela primjena projektnih obrazaca i hijerarhija nasljeđivanja.
+### 3. Poslovna logika (Paket: `Management`)
+Management klase djeluju kao posrednici između DAO sloja i Controllera (komandi). One drže poslovna pravila.
+* Klase `LibraryManager`, `BookManager`, `CustomerManager` i `LibrarianManager` upravljaju kolekcijama podataka u memoriji i delegiraju zahtjeve prema DAO sloju. Svaki menadžer implementira svoje sučelje (npr. `BookManagerInt`).
+* **Pretraživanje:** Pomoću sučelja `Filterable` i `FilterInterface` implementirana je napredna višekriterijska pretraga entiteta.
 
----
+*(Ovdje slijedi UML dijagram komunikkacije s bazom)*
+![UML Poslovna logika](graphics/Poslovna_logika_UML.png)*
+### 4. Controller sloj i upravljanje akcijama (Paket: `Commands`)
+Aplikacija ne koristi klasični, masivni Controller, već primjenjuje **Command obrazac (Naredba)**, čime se svaka korisnička akcija pretvara u zaseban objekt.
+* Osnova su sučelje `Command` i apstraktna klasa `BaseCommand`.
+* **Konkretne naredbe:** Svaka funkcionalnost ima svoju klasu: `AddBookCommand`, `BorrowBookCommand`, `ReturnBookCommand`, `BuyBookCommand`, `DeleteCustomerCommand`, `RegisterLibrarianCommand`, itd. Enum `ActionCommandsEnum` definira dostupne akcije.
+* Aplikacijom orkestrira `CommandManager` (preko `CommandManagerInterface`) koji prima zahtjeve iz grafičkog sučelja i izvršava ih, prosljeđujući ih Management sloju.
 
-### 1. Temeljna GUI hijerarhija i životni ciklus prozora
+### 5. Fleksibilna validacija (Paket: `Decorators`)
+Za složenu validaciju korisničkih unosa i generiranje detaljnih poruka o pogreškama implementiran je **Decorator obrazac**.
+* Baza je sučelje `ReturnMessage` i osnovna klasa `BasicReturnMessage`, te apstraktni `MessageDecorator`.
+* **Specifični dekorateri:** Podijeljeni u pakete ovisno o kontekstu (`AddBookDecorators`, `BorrowBookDecorators`, `RegisterUserDecorators`...). Na primjer, prilikom dodavanja knjige mogu se dinamički ulančati `EmptyNazivDecorator` i `CijenaWrongFormatDecorator` kako bi se vratila složena, objedinjena poruka o pogrešci bez mijenjanja osnovnih klasa.
 
-<span style="font-size:20px;">Temeljne i nasljeđene GUI komponente</span>
+### 6. Reaktivno korisničko sučelje (Paket: `ObserversAndOtherComps`)
+Kako bi grafičko sučelje (**View**) automatski reagiralo na promjene u bazi podataka, integriran je **Observer obrazac (Zapažač)**.
+* Logika je definirana kroz sučelja `Observable` i `Observer`.
+* Komponente sučelja, kao što su `ViewPanel`, `CustomerViewPanel`, `KnjigeViewPanel` i `LibrarianViewPanel`, djeluju kao pretplatnici. Kada `CommandManager` promijeni stanje sustava, on emitira obavijest, a `ViewPanelListener` osigurava da se sve tablice na ekranu automatski i trenutno osvježe s novim podacima.
 
-<figure>
-  <img src="./graphics/GUI_Inheritance_UML.png" alt="UML dijagram klasa" >
-  <figcaption>Slika 1: Hijerarhiski UML dijagram GUI komponenti </figcaption>
-</figure>
+### 7. Dinamička naplata (Paket: `StrategyComps`)
+Kupovina knjiga i naplata zakasnina izgrađena je na **Strategy obrascu (Strategija)**, čime je omogućeno lako dodavanje novih metoda plaćanja.
+* Sučelje `PaymentStrategy` propisuje metodu obrade plaćanja.
+* Implementacije `CardPayment`, `CashPayment` i `CryptoPayment` definiraju specifične algoritme za transakcije, na temelju odabira iz `PaymentStrategyEnum`.
 
-Ovaj dijagram prikazuje "kralježnicu" aplikacije. Definirane su apstraktne baze koje standardiziraju inicijalizaciju sučelja, dok `Shortcuttable`
-klase proširuju funkcionalnost podrškom za tipkovničke kratice (Undo: `CTRL + Z` | Redo: `CTRL + Y`).
-
-* **Apstraktne klase na dijagramu:** `BaseFrame`, `BaseDialog`, `ShortcuttableFrame`, `ShortcuttableDialog`, `ActiveBasePanel`, `BasePanel`.
-* **Opis:** Prikazuje nasljeđivanje gdje bazne klase definiraju metode `initComps()`, `layoutComps()` i `activateComps()`. `Shortcuttable` 
-klase služe kao međusloj koji omogućuje uniformno rukovanje `KeyStroke` događajima u cijeloj aplikaciji.
-
----
-
-### 2. Implementacija Command (Naredba) obrasca
-Dijagram prikazuje potpuni "decoupling" (odvajanje) korisničkog sučelja od poslovne logike. Svaka akcija (unos knjige, registracija, povrat) tretirana je kao neovisni objekt koji se može izvršiti.
-
-<span style="font-size:20px;">Temeljne i nasljeđene GUI komponente</span>
-
-<figure>
-  <img src="./graphics/Commands_UML.png" alt="UML dijagram klasa" >
-  <figcaption>Slika 1: Hijerarhiski UML dijagram Command klasa </figcaption>
-</figure>
-
-* **Klase na dijagramu:** `CommandInterface` (interface), `CommandManager`, `AddBookCommand`, `RegisterLibrarianCommand`, `ReturnBookCommand`.
-* **Opis:** `CommandManager` djeluje kao *Invoker* koji upravlja životnim ciklusom naredbi. Sve konkretne naredbe implementiraju `execute()`, `undo()` i `redo()` metode, osiguravajući visoku modularnost i mogućnost proširenja sustava bez zadiranja u GUI kôd.
-
----
-
-### 3. Upravljanje sesijom i Model podataka
-Ovaj dio dokumentira strukturu podataka i način na koji aplikacija upravlja stanjem prijavljenog korisnika tijekom rada.
-
-* **Klase na dijagramu:** `Librarian`, `Knjiga`, `SessionManager`, `SessionManagerInterface` (interface).
-* **Opis:** Istaknuta je upotreba **Singleton** obrasca na klasi `SessionManager` koja čuva referencu na `loggedInUser` (objekt klase `Librarian`). Prikazane su asocijacije koje definiraju koji entiteti su dostupni sustavu nakon uspješne autorizacije.
-
----
-
-### 4. Validacija i Message Decorator obrazac
-Prikaz mehanizma za dinamičku izgradnju poruka o pogreškama prilikom validacije formi, čime se izbjegava pisanje desetaka sličnih metoda za ispis upozorenja.
-
-* **Klase na dijagramu:** `ReturnMessage`, `MessageDecorator`, `UsernameMissingDecorator`, `AddressMissingDecorator`, `PasswordMissingDecorator`.
-* **Opis:** Korištenjem **Decorator** obrasca, osnovni objekt `ReturnMessage` se dinamički "omata" dodatnim informacijama o pogreškama. Ovo omogućuje slaganje kompleksnih validacijskih poruka (npr. "Nedostaje korisničko ime" + "Lozinka je prekratka") bez modificiranja originalne klase.
-
----
-
-### 5. Observer obrazac i reaktivni prikaz (View)
-Dijagram koji objašnjava kako sustav osigurava da su podaci u tablicama uvijek sinkronizirani s promjenama u modelu podataka (bazi).
-
-* **Klase na dijagramu:** `Observer` (interface), `ViewPanel`, `ViewPanelListener`, `BasePanel`.
-* **Opis:** `ViewPanel` implementira `Observer` sučelje. Kada `CommandManager` izvrši promjenu (npr. brisanje knjige), `ViewPanel` prima obavijest i automatski osvježava tablični prikaz koristeći `ViewPanelListener`, čime se izbjegava ručno osvježavanje prozora (tzv. "push" mehanizam).
-
----
-
-### 6. Primjer kompozicije: Registracija knjižničara
-Ovaj dijagram služi kao studija slučaja kako se kompleksni prozori u aplikaciji sastavljaju od više manjih, specijaliziranih komponenti.
-
-* **Klase na dijagramu:** `RegisterLibrarianWindow`, `RegisterLibLeftPanel`, `ConjoinedRegisterLibrarianPanel`, `ViewPanel`.
-* **Opis:** Prikazuje kako `RegisterLibrarianWindow` (kao glavni kontejner) agregira `RegisterLibLeftPanel` (forma za unos) i `ConjoinedRegisterLibrarianPanel` (prikaz i pretraga), demonstrirajući visoku razinu ponovne upotrebljivosti komponenti i lakše održavanje koda.
+### 8. Grafički sloj - View (Paketi: `GUI_Comps`, `MainFrameComps`, itd.)
+GUI sloj maksimalno primjenjuje principe nasljeđivanja i kompozicije komponenti biblioteke `Java Swing`.
+* **Zajednička baza:** Kako bi se izbjeglo ponavljanje koda, kreirane su roditeljske klase `BaseFrame`, `BaseDialog` i `BasePanel` (uz varijacije poput `ActiveBasePanel`, `ShortcuttableFrame`, `ShortcuttableDialog`).
+* **Modularnost:** Svaki prozor aplikacije izdvojen je u vlastiti paket (`AddBookComps`, `RegisterCustomerComps`, `LoginComps`...). Složeni prozori građeni su principom **kompozicije** (npr. `RegisterLibrarianWindow` sastoji se od `ConjoinedRegisterLibrarianPanel` i `RegisterLibLeftPanel`), uz pomoć dodatnih *utility* klasa za efekte vizualizacije (`EffectUtils`). Alatne trake i meniji modularno su izvedeni (`MenuBar`, `ToolBar`).

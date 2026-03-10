@@ -461,10 +461,12 @@ public boolean delete(String isbn) {
   return false;
 }
 ```
-</details>
+
 
 *Razlog za tolikim korištenjem `boolean` povratnog tipa metode je radi CommandManagera:
 Ako je sve `true`sprema Command objekt u undo stog (Pogledajte kod gore)*
+
+</details>
 
 
 ---

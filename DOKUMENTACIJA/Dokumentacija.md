@@ -436,9 +436,8 @@ public boolean removeBook(Knjiga k) {
   return false;
 }
 ```
-</details>
 
-5. **Baza podataka (DAO):** `BookManager` delegira konačni zadatak klasi `BookDAO`,
+6. **Baza podataka (DAO):** `BookManager` delegira konačni zadatak klasi `BookDAO`,
    koja izvršava stvarni SQL upit i trajno uklanja knjigu iz MySQL baze podataka (vraća `true` ako je konekcija s bazom "živa"
    i ako je operacija uspješna.). Ako je `BookDAO.delete()` vratio `true` tek onda `BookManager` briše knjigu iz radne memorije.
 
@@ -462,8 +461,14 @@ public boolean delete(String isbn) {
   return false;
 }
 ```
+
+
 *Razlog za tolikim korištenjem `boolean` povratnog tipa metode je radi CommandManagera:
 Ako je sve `true`sprema Command objekt u undo stog (Pogledajte kod gore)*
+
+</details>
+
+
 ---
 
 ### 🛡️ Integritet podataka i slojevitost

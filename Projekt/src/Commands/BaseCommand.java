@@ -13,7 +13,7 @@ package Commands;
  * komuniciraju s korisnikom putem dijaloga o pogreškama.</li>
  * </ul>
  * <b>Tijek izvršavanja unutar hijerarhije:</b>
- * <li>Poziv {@code canExecute()}: Konkretna naredba koristi {@code createMessage()} za pravljenje poruke o grešci.</li>
+ * <ul><li>Poziv {@code canExecute()}: Konkretna naredba koristi {@code createMessage()} za pravljenje poruke o grešci.</li></ul>
  */
 public abstract class BaseCommand {
 

@@ -38,6 +38,7 @@ public abstract class BaseFrame extends JFrame {
                 }
             }
         });
+        setIconImage(new ImageIcon("data/frame_icon.png").getImage());
     }
 
 

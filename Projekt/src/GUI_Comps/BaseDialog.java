@@ -59,6 +59,7 @@ public abstract class BaseDialog extends JDialog {
                 animateClose();
             }
         });
+        setIconImage(new ImageIcon("data/frame_icon.png").getImage());
     }
 
     /** Inicijalizira komponente prozora*/

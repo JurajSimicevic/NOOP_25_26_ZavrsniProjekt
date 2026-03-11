@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Decorators.AddBookDecorators.CijenaWrongFormatDecorator</OriginalElement>
+  <nodes>
+    <node x="-140.0" y="574.0">Decorators.AddBookDecorators.EmptyISBNdecorator</node>
+    <node x="37.0" y="454.0">Decorators.AddBookDecorators.EmptyNazivDecorator</node>
+    <node x="89.5" y="141.5">Decorators.BasicReturnMessage</node>
+    <node x="213.5" y="574.0">Decorators.AddBookDecorators.EmptyAuthorDecorator</node>
+    <node x="-62.5" y="-13.5">Decorators.ReturnMessage</node>
+    <node x="-134.0" y="286.5">Decorators.MessageDecorator</node>
+    <node x="572.0" y="574.0">Decorators.AddBookDecorators.CijenaWrongFormatDecorator</node>
+    <node x="398.0" y="454.0">Decorators.AddBookDecorators.EmptyVrstaDecorator</node>
+    <node x="795.0" y="454.0">Decorators.AddBookDecorators.EmptyCijenaDecorator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Decorators.BasicReturnMessage" target="Decorators.ReturnMessage" relationship="REALIZATION">
+      <point x="0.0" y="-56.5" />
+      <point x="204.0" y="118.0" />
+      <point x="64.0" y="118.0" />
+      <point x="64.0" y="78.0" />
+      <point x="67.25" y="78.0" />
+      <point x="43.25" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.CijenaWrongFormatDecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="744.0" y="418.0" />
+      <point x="4.0" y="418.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.EmptyNazivDecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="184.0" y="418.0" />
+      <point x="4.0" y="418.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="Decorators.MessageDecorator" target="Decorators.ReturnMessage" relationship="REALIZATION">
+      <point x="69.0" y="-31.5" />
+      <point x="73.0" y="270.5" />
+      <point x="64.0" y="270.5" />
+      <point x="64.0" y="78.0" />
+      <point x="67.25" y="78.0" />
+      <point x="43.25" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.EmptyVrstaDecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="544.0" y="418.0" />
+      <point x="4.0" y="418.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.EmptyCijenaDecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="944.0" y="418.0" />
+      <point x="4.0" y="418.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="Decorators.MessageDecorator" target="Decorators.ReturnMessage" relationship="TO_ONE">
+      <point x="-69.0" y="-31.5" />
+      <point x="-65.0" y="258.0" />
+      <point x="-19.25" y="258.0" />
+      <point x="-43.25" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.EmptyAuthorDecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="364.0" y="418.0" />
+      <point x="4.0" y="418.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="Decorators.AddBookDecorators.EmptyISBNdecorator" target="Decorators.MessageDecorator" relationship="GENERALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.2785315243415802" showDependencies="true" x="486.5" y="334.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>BackEnd.ConnectionInfo</OriginalElement>
+  <nodes>
+    <node x="-507.2590673575129" y="421.49999999999994">BackEnd.DBConnectionManagerInterface</node>
+    <node x="-11.730569948186712" y="1098.0">BackEnd.DataAccessObject.LibrarianDAO.Holder</node>
+    <node x="-510.2590673575129" y="692.5">BackEnd.DatabaseConnectionManager</node>
+    <node x="-302.7590673575129" y="998.0">BackEnd.ConnectionInfo</node>
+    <node x="199.0" y="616.3626943005181">BackEnd.DataAccessObject.IntBookDAO</node>
+    <node x="312.0" y="1098.0">BackEnd.DataAccessObject.BookDAO.Holder</node>
+    <node x="635.2305699481867" y="1098.0">BackEnd.DataAccessObject.CustomerDAO.Holder</node>
+    <node x="-64.73056994818671" y="861.5">BackEnd.DataAccessObject.LibrarianDAO</node>
+    <node x="-410.2590673575129" y="1098.0">BackEnd.DatabaseConnectionManager.Holder</node>
+    <node x="582.7305699481867" y="640.3626943005181">BackEnd.DataAccessObject.IntCustomerDAO</node>
+    <node x="199.0" y="861.4999999999999">BackEnd.DataAccessObject.BookDAO</node>
+    <node x="-64.73056994818671" y="616.3626943005181">BackEnd.DataAccessObject.IntLibrarianDAO</node>
+    <node x="582.7305699481867" y="861.4999999999999">BackEnd.DataAccessObject.CustomerDAO</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="BackEnd.DataAccessObject.BookDAO.Holder" target="BackEnd.DataAccessObject.BookDAO" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="92.50000000000011" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.BookDAO" target="BackEnd.DataAccessObject.IntBookDAO" relationship="REALIZATION">
+      <point x="0.0" y="-92.5" />
+      <point x="0.0" y="68.0" />
+    </edge>
+    <edge source="BackEnd.DatabaseConnectionManager" target="BackEnd.DBConnectionManagerInterface" relationship="REALIZATION">
+      <point x="0.0" y="-117.0" />
+      <point x="0.0" y="68.00000000000006" />
+    </edge>
+    <edge source="BackEnd.DatabaseConnectionManager.Holder" target="BackEnd.DatabaseConnectionManager" relationship="TO_ONE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.LibrarianDAO.Holder" target="BackEnd.DataAccessObject.LibrarianDAO" relationship="CREATE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="92.5" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.LibrarianDAO.Holder" target="BackEnd.DataAccessObject.LibrarianDAO" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="92.5" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.LibrarianDAO.Holder" target="BackEnd.DataAccessObject.LibrarianDAO" relationship="TO_ONE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="92.5" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.BookDAO.Holder" target="BackEnd.DataAccessObject.BookDAO" relationship="CREATE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="92.50000000000011" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.BookDAO.Holder" target="BackEnd.DataAccessObject.BookDAO" relationship="TO_ONE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="92.50000000000011" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.CustomerDAO" target="BackEnd.DataAccessObject.IntCustomerDAO" relationship="REALIZATION">
+      <point x="0.0" y="-80.5" />
+      <point x="0.0" y="56.0" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.LibrarianDAO" target="BackEnd.DataAccessObject.IntLibrarianDAO" relationship="REALIZATION">
+      <point x="0.0" y="-92.5" />
+      <point x="0.0" y="68.0" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.CustomerDAO.Holder" target="BackEnd.DataAccessObject.CustomerDAO" relationship="TO_ONE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="80.5" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.CustomerDAO.Holder" target="BackEnd.DataAccessObject.CustomerDAO" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="BackEnd.DatabaseConnectionManager.Holder" target="BackEnd.DatabaseConnectionManager" relationship="CREATE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.DatabaseConnectionManager.Holder" target="BackEnd.DatabaseConnectionManager" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.DataAccessObject.CustomerDAO.Holder" target="BackEnd.DataAccessObject.CustomerDAO" relationship="CREATE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="80.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.0157894736842106" showDependencies="true" x="138.88341968911902" y="798.9326424870467" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

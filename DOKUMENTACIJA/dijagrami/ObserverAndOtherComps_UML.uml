@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ObserversAndOtherComps.KnjigeViewPanel</OriginalElement>
+  <nodes>
+    <node x="-636.8082901554403" y="579.2435233160621">ObserversAndOtherComps.ViewPanel</node>
+    <node x="4.0" y="239.5">ObserversAndOtherComps.Observable</node>
+    <node x="-685.4896373056995" y="263.5">ObserversAndOtherComps.ViewPanelListener</node>
+    <node x="-623.4041450777202" y="1209.9870466321242">ObserversAndOtherComps.CustomerViewPanel</node>
+    <node x="-138.5" y="143.5">ObserversAndOtherComps.Observer</node>
+    <node x="246.0" y="435.0">ObserversAndOtherComps.SearchField</node>
+    <node x="-601.2746113989637" y="1376.1839378238344">ObserversAndOtherComps.LibrarianViewPanel</node>
+    <node x="-685.4896373056995" y="1020.8056994818655">ObserversAndOtherComps.KnjigeViewPanel</node>
+    <node x="580.8238341968911" y="229.0">BackEnd.Management.LibraryManager</node>
+    <node x="386.0" y="901.7176165803107">BackEnd.Management.LibraryManager.Holder</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ObserversAndOtherComps.LibrarianViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="-110.5" y="0.0" />
+      <point x="-147.0" y="1419.6839378238344" />
+      <point x="-147.0" y="768.2435233160621" />
+      <point x="152.0" y="0.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="TO_ONE">
+      <point x="52.0" y="-0.0" />
+      <point x="748.8238341968911" y="933.2176165803107" />
+      <point x="-0.0" y="296.5" />
+    </edge>
+    <edge source="ObserversAndOtherComps.ViewPanel" target="ObserversAndOtherComps.Observer" relationship="REALIZATION">
+      <point x="91.5" y="-189.0" />
+      <point x="-393.3082901554403" y="175.0" />
+      <point x="-66.5" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.KnjigeViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="163.0" y="0.0" />
+      <point x="-147.0" y="1088.8056994818655" />
+      <point x="-147.0" y="768.2435233160621" />
+      <point x="152.0" y="0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.ViewPanel" target="ObserversAndOtherComps.ViewPanelListener" relationship="TO_ONE">
+      <point x="-40.0" y="-189.0" />
+      <point x="-524.8082901554403" y="526.25" />
+      <point x="-571.4896373056995" y="526.25" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager" target="ObserversAndOtherComps.Observable" relationship="REALIZATION">
+      <point x="-168.0" y="-230.5" />
+      <point x="124.0" y="-0.0" />
+    </edge>
+    <edge source="ObserversAndOtherComps.CustomerViewPanel" target="ObserversAndOtherComps.ViewPanel" relationship="GENERALIZATION">
+      <point x="-114.0" y="0.0" />
+      <point x="-147.0" y="1253.4870466321242" />
+      <point x="-147.0" y="768.2435233160621" />
+      <point x="152.0" y="0.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="INNER_CLASS">
+      <point x="52.0" y="-15.0" />
+      <point x="733.8238341968911" y="918.2176165803107" />
+      <point x="-15.0" y="296.5" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="CREATE">
+      <point x="52.0" y="15.0" />
+      <point x="763.8238341968911" y="948.2176165803107" />
+      <point x="15.0" y="296.5" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager" target="ObserversAndOtherComps.Observer" relationship="TO_MANY">
+      <point x="-0.0" y="-296.5" />
+      <point x="748.8238341968911" y="175.0" />
+      <point x="66.5" y="-0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.660958904109589" showDependencies="true" x="7.5" y="865.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

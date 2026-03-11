@@ -476,7 +476,8 @@ Projekt strogo poštuje pravilo razdvajanja odgovornosti **(Separation of Concer
 
 ## 📦 Popis vanjskih biblioteka i modula
 
-U razvoju aplikacije korišten je **Apache Maven** za upravljanje ovisnostima. Korištene biblioteke omogućuju rad s bazom podataka te moderno i responzivno grafičko sučelje.
+U razvoju aplikacije korišten je **Apache Maven** za upravljanje ovisnostima. 
+Korištene biblioteke omogućuju rad s bazom podataka te moderno i responzivno grafičko sučelje.
 
 ---
 
@@ -484,7 +485,7 @@ U razvoju aplikacije korišten je **Apache Maven** za upravljanje ovisnostima. K
 * **Namjena:** Službeni JDBC upravljački program (driver) koji omogućuje komunikaciju između Jave i MySQL baze podataka. Neophodan je za izvršavanje SQL upita unutar DAO klasa.
 * **Osnovni podaci:**
     * **Grupa i artefakt:** `com.mysql:mysql-connector-j`
-    * **Verzija:** `9.4.0`
+    * **Verzija:** `9.6.0`
     * **Lokacija preuzimanja:** [Maven Repository](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j)
     * **Službena dokumentacija:** [MySQL Connector/J Manual](https://dev.mysql.com/doc/connector-j/en/)
 

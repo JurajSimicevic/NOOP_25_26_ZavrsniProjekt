@@ -23,10 +23,10 @@ package BackEnd;
  */
 public record ConnectionInfo() {
     /** Adresa MySQL poslužitelja (Aiven Cloud host). */
-    static String host = "mysql-3c6edc95-vjezba8mvc.k.aivencloud.com";
+    static String host = "zavrsni-public-zavrsni-public.i.aivencloud.com";
 
     /** Port na kojem MySQL servis sluša (standardni je obično 3306, ovdje je 24812). */
-    static String port = "24812";
+    static String port = "28552";
 
     /** Naziv baze podataka kojoj se pristupa. */
     static String databaseName = "defaultdb";
@@ -35,5 +35,5 @@ public record ConnectionInfo() {
     static String userName = "avnadmin";
 
     /** Lozinka za pristup bazi podataka. */
-    static String password = "AVNS_jZh9yHGDlCmtA0H2yeC";
+    static String password = "AVNS_PGC-QJmEnGY0SadAIBb";
 }

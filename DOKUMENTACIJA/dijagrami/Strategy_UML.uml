@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>StrategyComps.CashPayment</OriginalElement>
+  <nodes>
+    <node x="-110.5" y="473.5">BuyBookComps.BuyBookWindow</node>
+    <node x="207.5" y="274.0">StrategyComps.CardPayment</node>
+    <node x="67.5" y="154.0">StrategyComps.CryptoPayment</node>
+    <node x="-72.5" y="274.0">StrategyComps.CashPayment</node>
+    <node x="-112.5" y="-13.5">StrategyComps.PaymentStrategy</node>
+    <node x="374.35803108808295" y="431.87616580310873">StrategyComps.PaymentStrategyEnum</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="BuyBookComps.BuyBookWindow" target="StrategyComps.PaymentStrategy" relationship="TO_ONE">
+      <point x="-97.75" y="-164.5" />
+      <point x="-12.75" y="438.0" />
+      <point x="-95.0" y="438.0" />
+      <point x="-95.0" y="258.0" />
+      <point x="-53.75" y="258.0" />
+      <point x="-58.75" y="31.5" />
+    </edge>
+    <edge source="BuyBookComps.BuyBookWindow" target="StrategyComps.CardPayment" relationship="CREATE">
+      <point x="97.75" y="-164.5" />
+      <point x="182.75" y="438.0" />
+      <point x="185.0" y="438.0" />
+      <point x="185.0" y="398.0" />
+      <point x="325.0" y="398.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="StrategyComps.CardPayment" target="StrategyComps.PaymentStrategy" relationship="REALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="325.0" y="138.0" />
+      <point x="185.0" y="138.0" />
+      <point x="185.0" y="78.0" />
+      <point x="63.75" y="78.0" />
+      <point x="58.75" y="31.5" />
+    </edge>
+    <edge source="StrategyComps.CryptoPayment" target="StrategyComps.PaymentStrategy" relationship="REALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="185.0" y="78.0" />
+      <point x="63.75" y="78.0" />
+      <point x="58.75" y="31.5" />
+    </edge>
+    <edge source="BuyBookComps.BuyBookWindow" target="StrategyComps.CryptoPayment" relationship="CREATE">
+      <point x="97.75" y="-164.5" />
+      <point x="182.75" y="438.0" />
+      <point x="185.0" y="438.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="BuyBookComps.BuyBookWindow" target="StrategyComps.CashPayment" relationship="CREATE">
+      <point x="97.75" y="-164.5" />
+      <point x="182.75" y="438.0" />
+      <point x="185.0" y="438.0" />
+      <point x="185.0" y="398.0" />
+      <point x="45.0" y="398.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="StrategyComps.CashPayment" target="StrategyComps.PaymentStrategy" relationship="REALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="45.0" y="138.0" />
+      <point x="185.0" y="138.0" />
+      <point x="185.0" y="78.0" />
+      <point x="63.75" y="78.0" />
+      <point x="58.75" y="31.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.1529271206690561" showDependencies="true" x="248.0" y="404.5" />
+  <SelectedNodes>
+    <node>StrategyComps.PaymentStrategyEnum</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

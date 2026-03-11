@@ -40,13 +40,13 @@ import java.util.List;
  * Nakon refaktoriranja, ova klasa više ne upravlja izravno kolekcijama podataka.
  * Umjesto toga, ona služi kao centralna točka pristupa (Hub) koja delegira specifične
  * poslovne operacije specijaliziranim managerima:
+ * </p>
  * <ul>
  * <li>{@link BookManagerInt} - za logiku knjiga i posudbi.</li>
  * <li>{@link CustomerManagerInt} - za upravljanje članovima.</li>
  * <li>{@link LibrarianManagerInt} - za upravljanje osobljem.</li>
  * </ul>
- * </p>
- * * <b>Ključne odgovornosti:</b>
+ * <b>Ključne odgovornosti:</b>
  * <ul>
  * <li><b>Delegacija:</b> Prosljeđuje zahtjeve GUI sloja odgovarajućim managerima.</li>
  * <li><b>Sinkronizacija (Observer):</b> Upravlja listom promatrača i obavještava

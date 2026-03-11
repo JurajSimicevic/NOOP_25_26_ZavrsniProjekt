@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>BackEnd.Management.CustomerManagerInt</OriginalElement>
+  <nodes>
+    <node x="343.241884816754" y="1437.390837696335">BackEnd.Management.CustomerManager</node>
+    <node x="327.741884816754" y="69.45416271057684">BackEnd.Management.LibraryManagerInterface</node>
+    <node x="320.741884816754" y="-186.8725388601037">BackEnd.Management.FilterInterface</node>
+    <node x="782.6453815478935" y="1137.9686886580037">BackEnd.Management.LibrarianManagerInt</node>
+    <node x="782.6453815478935" y="1431.1212041884817">BackEnd.Management.LibrarianManager</node>
+    <node x="353.241884816754" y="1137.9686886580037">BackEnd.Management.CustomerManagerInt</node>
+    <node x="-31.661611914385503" y="1768.5">BackEnd.Management.BookManager.Holder</node>
+    <node x="320.741884816754" y="420.66201611371827">BackEnd.Management.LibraryManager</node>
+    <node x="436.741884816754" y="1768.5">BackEnd.Management.CustomerManager.Holder</node>
+    <node x="873.1453815478935" y="1768.5">BackEnd.Management.LibrarianManager.Holder</node>
+    <node x="1122.7194666739015" y="724.3021834902197">BackEnd.Management.Filterable</node>
+    <node x="-140.6616119143855" y="1437.390837696335">BackEnd.Management.BookManager</node>
+    <node x="-140.6616119143855" y="1137.9686886580037">BackEnd.Management.BookManagerInt</node>
+    <node x="47.04927705287139" y="495.5352331606217">BackEnd.Management.LibraryManager.Holder</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="BackEnd.Management.LibraryManager" target="BackEnd.Management.LibraryManagerInterface" relationship="REALIZATION">
+      <point x="0.0" y="-296.49999999999994" />
+      <point x="0.0" y="152.0" />
+    </edge>
+    <edge source="BackEnd.Management.CustomerManager" target="BackEnd.Management.CustomerManagerInt" relationship="REALIZATION">
+      <point x="0.0" y="-117.0" />
+      <point x="0.0" y="56.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager" target="BackEnd.Management.LibrarianManagerInt" relationship="TO_ONE">
+      <point x="163.0" y="296.5" />
+      <point x="651.741884816754" y="906.6070306269156" />
+      <point x="889.7306757453277" y="906.6070306269156" />
+      <point x="889.7306757453277" y="1010.8945094698445" />
+      <point x="889.1855573355446" y="1010.8945094698445" />
+      <point x="-22.459824212348963" y="-54.83836990815871" />
+    </edge>
+    <edge source="BackEnd.Management.BookManager" target="BackEnd.Management.BookManagerInt" relationship="REALIZATION">
+      <point x="0.0" y="-141.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibrarianManager.Holder" target="BackEnd.Management.LibrarianManager" relationship="CREATE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.Management.BookManagerInt" target="BackEnd.Management.Filterable" relationship="INTERFACE_GENERALIZATION">
+      <point x="160.9996119143855" y="49.500311341996394" />
+      <point x="267.29013645118425" y="1267.469" />
+      <point x="267.29013645118425" y="1343.6797631771692" />
+      <point x="1082.0" y="1343.6797631771692" />
+      <point x="1082.0" y="768.302" />
+      <point x="-119.50046667390143" y="-1.8349021968333545E-4" />
+    </edge>
+    <edge source="BackEnd.Management.CustomerManagerInt" target="BackEnd.Management.Filterable" relationship="INTERFACE_GENERALIZATION">
+      <point x="1.1518324600956475E-4" y="-55.999688658003606" />
+      <point x="488.742" y="1064.9692538860102" />
+      <point x="1082.0" y="1064.9692538860102" />
+      <point x="1082.0" y="768.302" />
+      <point x="-119.50046667390143" y="-1.8349021968333545E-4" />
+    </edge>
+    <edge source="BackEnd.Management.CustomerManager.Holder" target="BackEnd.Management.CustomerManager" relationship="CREATE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="INNER_CLASS">
+      <point x="52.0" y="0.0" />
+      <point x="-168.0" y="-190.1267829530965" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManagerInterface" target="BackEnd.Management.FilterInterface" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-152.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="BackEnd.Management.BookManager.Holder" target="BackEnd.Management.BookManager" relationship="CREATE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="141.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager" target="BackEnd.Management.CustomerManagerInt" relationship="TO_ONE">
+      <point x="-14.99988481675399" y="296.5" />
+      <point x="-14.99988481675399" y="-56.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="TO_ONE">
+      <point x="52.0" y="15.0" />
+      <point x="-168.0" y="-175.1267829530965" />
+    </edge>
+    <edge source="BackEnd.Management.LibrarianManagerInt" target="BackEnd.Management.Filterable" relationship="INTERFACE_GENERALIZATION">
+      <point x="128.99961845210646" y="3.113419963938213E-4" />
+      <point x="911.6453815478935" y="1193.969" />
+      <point x="911.6453815478935" y="1064.9692538860102" />
+      <point x="1082.0" y="1064.9692538860102" />
+      <point x="1082.0" y="768.302" />
+      <point x="-119.50046667390143" y="-1.8349021968333545E-4" />
+    </edge>
+    <edge source="BackEnd.Management.BookManager.Holder" target="BackEnd.Management.BookManager" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="141.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager" target="BackEnd.Management.BookManagerInt" relationship="TO_ONE">
+      <point x="-168.0" y="0.0" />
+      <point x="20.338388085614497" y="717.1620161137182" />
+      <point x="0.0" y="-80.0" />
+    </edge>
+    <edge source="BackEnd.Management.BookManager.Holder" target="BackEnd.Management.BookManager" relationship="TO_ONE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="141.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibrarianManager" target="BackEnd.Management.LibrarianManagerInt" relationship="REALIZATION">
+      <point x="-13.5" y="-117.0" />
+      <point x="0.0" y="56.0" />
+    </edge>
+    <edge source="BackEnd.Management.CustomerManager.Holder" target="BackEnd.Management.CustomerManager" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.Management.CustomerManager.Holder" target="BackEnd.Management.CustomerManager" relationship="TO_ONE">
+      <point x="15.0" y="-31.5" />
+      <point x="15.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibraryManager.Holder" target="BackEnd.Management.LibraryManager" relationship="CREATE">
+      <point x="52.0" y="-15.0" />
+      <point x="-168.0" y="-205.1267829530965" />
+    </edge>
+    <edge source="BackEnd.Management.LibrarianManager.Holder" target="BackEnd.Management.LibrarianManager" relationship="INNER_CLASS">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="BackEnd.Management.LibrarianManager.Holder" target="BackEnd.Management.LibrarianManager" relationship="TO_ONE">
+      <point x="-15.0" y="-31.5" />
+      <point x="-15.0" y="117.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="1.1554472934036297" showDependencies="true" x="540.2422416580308" y="1012.2080429894306" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
